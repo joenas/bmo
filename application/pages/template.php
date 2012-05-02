@@ -13,14 +13,16 @@
 	<link rel="alternate stylesheet" <?php $this->Link(CSS.'debug.css');?> title="debug stylesheet">
 <?php endif; ?>
 	<link rel="stylesheet/less" type="text/css" <?php $this->Link(CSS.'styles.less');?> >
+	<link href='http://fonts.googleapis.com/css?family=Oleo+Script' rel='stylesheet' type='text/css'>
+	<script <?php $this->Link('js/less.js', 'src');?> type="text/javascript"></script>
 
 	<!-- $pageStyle for additional style -->
 	<?php if(isset($pageStyle)) : ?>
 	<style type="text/css">
-	<?php $pageStyle; ?>
+	<?php echo $pageStyle; ?>
 	</style>
 	<?php endif; ?>
-	<script <?php $this->Link('js/less.js', 'src');?> type="text/javascript"></script>
+	
 
 	<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 	<!--[if !IE 7]>
@@ -43,7 +45,7 @@
 <!-- navigation header -->
 <header class="top">
 	<nav class="admin">
-	<a href="/">admin</a>
+	<a href="/admin">admin</a>
 	</nav>
 
 	<nav class="menu">
@@ -58,8 +60,6 @@
 
 <!-- primary content wrapper -->
 <div class="mainwrapper">
-
-
 
 <header class="logo">
 	<h5>Begravningsmuseum Online</h5>
@@ -84,20 +84,18 @@ else { require($view); }
 <!-- footer -->
 <div class="footer">
 	<footer class="bottom">
-	| 
-	<a href="http://validator.w3.org/check/referer">HTML5</a> 
-	<a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a> -
-	<a href="http://jigsaw.w3.org/css-validator/check/referer?profile=css3">CSS3</a> -
-	<a href="http://validator.w3.org/unicorn/check?ucn_uri=referer&amp;ucn_task=conformance">Unicorn</a>  -
-	<a href="http://validator.w3.org/i18n-checker/check?uri=<?php // echo getCurrentUrl(); ?>">i18n</a> -
+	<div class="leftfoot">
+	<p><a href="http://validator.w3.org/check/referer">HTML5</a> /
+	<a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a> / 
+	<a href="http://validator.w3.org/unicorn/check?ucn_uri=referer&amp;ucn_task=conformance">Unicorn</a> / 
+	<a href="http://validator.w3.org/i18n-checker/check?uri=<?php // echo getCurrentUrl(); ?>">i18n</a> /
 	<a href="http://validator.w3.org/checklink?uri=<?php // echo  getCurrentUrl(); ?>">Links</a>
-	| 
-	</footer>
+</p>
+	</div>
+	<div class="rightfoot">
+	<p>Design &amp; Copyright<a href="http://www.jonnev.se">Jon Neverland</a>
+	</div>
 
-	<footer class="time">
-<?php if(isset($this->time)) : ?>
-	<p>Page generated in <?php echo round( microtime(true)-$this->time, 5 ); ?> seconds</p>
-<?php endif; ?>
 	</footer>
 </div>
 

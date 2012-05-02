@@ -10,7 +10,7 @@ class Article {
 	}
 
 	public function getAllArticles() {
-		$query = 'SELECT * FROM ' . $this->table;
+		$query = 'SELECT * FROM ' . self::$table;
 
 		return $this->db->ExecuteSelectQueryAndFetchAll($query);
 	} 		

@@ -2,6 +2,8 @@
 
   <!-- primary content -->
   <div class="primary">
+  <?php echo $this->RandomImage(); ?>
+
 	<article>
 	<h1><?php echo $view_title; ?></h1>
 	<p><?php echo $view_content; ?></p>

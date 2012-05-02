@@ -73,4 +73,26 @@ class Core {
 		print "<a href='".$this->baseDir."/source?dir=".dirname($pageFile)."&amp;file=".basename($pageFile)."'>Källkod</a>";
 	}
 
+	public function RandomImage() {
+
+		$aPath = ($this->baseDir=='/') ? 'img/250/' : $this->baseDir.'img/250/';	
+		
+		$list = Array();
+		if(is_dir($aPath)) {
+			if ($dh = opendir($aPath)) {
+				while (($file = readdir($dh)) !== false) {
+					if(is_file("$aPath/$file") && $file != '.htaccess') {
+						$list[$file] = "$file";
+					}
+				}
+				closedir($dh);
+			}
+		}
+		sort($list, SORT_STRING);
+		$image = $list[rand(0, count($list)-1)];
+
+		return "<div class='randimage'><img src='/{$aPath}{$image}' alt=''></div>";
+
+	}
+
 }

@@ -1,20 +1,28 @@
+// http://colorschemedesigner.com/#0651BNhlAK-00
+
 @import url(forms.css);
 
-@primbackground: #333;
+@primbackground: #690e00;
 @secbackground: #FFFFFF;
 
-@primtextcolor: #aa6677;
+@primtextcolor: #692200;
 @sectextcolor: #778899;
 @linkcolor: #a4a5a6;
 
 // menu
-@menulinkcolor: #555555;
-@menuhighlight: #cccccc;
+@menulinkcolor: #321000;
+@menuhighlight: #ddd;
 @menuhovercolor: @menuhighlight;
 
+@footerbackground: @primbackground;
+@footerlinkcolor: #321000;
+@footerhovercolor: white;
+@footertextcolor: white;
+
 @pagewidth: 90%;
-@divprimwidth: 90%;
+@divprimwidth: 85%;
 @divsecwidth: 100 - @divprimwidth;
+@divimagewidth: 25%;
 
 @footerwidth: 100%;
 @footerheight: 90px;
@@ -37,11 +45,11 @@ aside,figure,figcaption{display:block;}
 /*____________________*/
 
 html, body {
-	overflow-y:scroll; 
 	height: 100%; 
 	font-size: 1em;
 	padding: 0px;
 	margin: 0px;
+	background-color: @secbackground;
 
 }
 
@@ -52,7 +60,8 @@ div.mainwrapper {
 }
 
 body {
-
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 0.9em;
 }
 
 a { color: @linkcolor; }
@@ -77,8 +86,10 @@ header.top {
 	text-align: center;
 	width: 100%;
 	background-color: @primbackground;
+
 	.admin {
 		.right;
+		font-size: 0.8em;
 		padding-right: 1em;
 		padding-top: 1em;
 	}
@@ -90,7 +101,8 @@ nav.menu {
 	padding: 1em 0;
 
 	a {
-		text-align: center;	
+		font-family: 'Oleo Script', cursive;
+		text-align: center;
 		color: @menulinkcolor;
 		padding:0 0.5em;
 		text-decoration: none;
@@ -117,9 +129,15 @@ body#about a#about-
 /*______*/
 
 header.logo {
+	font-family: 'Bilbo Swash Caps', cursive;
+	font-family: 'Oleo Script', cursive;
+	//font-family: 'Great Vibes', cursive;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 	text-align: center; 
 	width: 100%;
-	color: ; 
+	color: black;
+	margin-top: 2em;
+	margin-bottom: 2em;
 	h5 {
 		font-style: normal;
 		font-weight: normal;
@@ -135,11 +153,18 @@ div.stickfootwrap {
 	min-height: 100%;
 }
 
-div.mainwrapper {	
+div.mainwrapper {
 	width: @pagewidth;
+	min-height: 35em;
 	background-color: @secbackground;
 	overflow:auto;
 	padding-bottom: @footerheight;
+}
+
+div.randimage {
+	.left;
+	margin-right: 2em;
+	width: @divimagewidth;
 }
 
 div.primary {
@@ -164,11 +189,10 @@ div.footer {
 	position: relative;
 	margin-top: -@footerheight; /* negative value of footer height */
 	height: @footerheight;
-	background-color: @primbackground;	
-
+	background-color: @footerbackground;	
+	border-top: 1px solid black;
 	clear:both;
 }
-
 
 // actual content container
 footer.bottom {
@@ -179,16 +203,42 @@ footer.bottom {
 	padding-top: 1em;
 	a {
 		text-decoration: none;
+		margin: 0 0.7em;
+		color: @footerlinkcolor;
 		&:hover {
-			color: black;
+			color: @footerhovercolor;
+			background: @primbackground;
 		}
+	}
+	p {
+		color: @footertextcolor;
 	}
 }
 
-footer.time {
-	font-size: 0.6em;
-	float: right;
-	margin-right: 2em;
+@footmargin: 1em 0;
+div.leftfoot {
+	width:50%;
+	.left;
+	margin: @footmargin;
+}
+
+div.rightfoot {
+	width: 50%;
+	.right;
+	margin: @footmargin;
+}
+
+ /* Page styling classes */
+ /*_____________________*/
+
+
+form.login {
+	width: 450px;
+	margin: 0 auto;
+}
+
+legend.login {
+	color: @primtextcolor;
 }
 
 
@@ -196,7 +246,8 @@ footer.time {
 /*________________________*/
 
  .error, .alert, .notice, .success, .info { 
-	 margin-left: 2em; 
+ 	margin: 1.5em 0;
+	 
 }
 
  

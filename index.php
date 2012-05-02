@@ -22,7 +22,6 @@ $request->Parse();
 //----------------------------------------------------
 
 $core = new Core();
-$core->time = $time;
 $core->Route($request);
 $core->Render();
 

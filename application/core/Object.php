@@ -10,8 +10,7 @@ class Object {
 	}
 
 	public function getAllObjects() {
-		$query = 'SELECT * FROM ' . $this->table;
-
+		$query = 'SELECT * FROM ' . self::$table;
 		return $this->db->ExecuteSelectQueryAndFetchAll($query);
 	} 		
 	

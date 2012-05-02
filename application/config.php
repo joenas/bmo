@@ -8,9 +8,6 @@ error_reporting(-1);
 session_name(preg_replace('/[:\.\/-_]/', '', __FILE__));
 session_start();
 
-// time page generation, display in footer. comment out to disable timing.
-$time = microtime(true); 
-
 define( 'DEFAULTPAGE', 		'home');
 define( 'DEFAULT_TITLE', 	'BMO - Begravningsmuseum Online');
 define( 'EXTENSION',		'.php');
@@ -22,7 +19,7 @@ define( 'IMG',				'img/');
 define( 'CORE', 			APP.'core/');
 define( 'DATABASE', 		APP.'database/');
 define( 'PAGES',			APP.'pages/');
-define( 'FUNCTIONS', 		APP.'function/' );
+//define( 'FUNCTIONS', 		APP.'function/' );
 
 define( 'CONTROLLER_PREFIX', 	'Controller_');  		// File prefix
 define( 'MODEL_PREFIX',			'Model_');				// File prefix
