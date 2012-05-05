@@ -1,6 +1,6 @@
 <?php 
 
-class Controller_Objects implements iController {
+class Controller_Objects extends CoreController {
 
 	public function __contruct() { }
 
@@ -16,7 +16,7 @@ class Controller_Objects implements iController {
 
 	public function Route($request) {
 
-		$db = new Database();
+		$db = Database::Instance();
 
 		$object = new Object($db);
 

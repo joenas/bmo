@@ -1,6 +1,6 @@
 <?php 
 
-class Controller_Gallery implements iController {
+class Controller_Gallery extends CoreController {
 
 	public function __contruct() { }
 
@@ -16,7 +16,6 @@ class Controller_Gallery implements iController {
 
 	public function Route($request) {
 
-		$db = new Database();	
 	}
 	
 }

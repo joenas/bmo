@@ -1,6 +1,7 @@
 // http://colorschemedesigner.com/#0651BNhlAK-00
 
 @import url(forms.css);
+@import url(source.css);
 
 @primbackground: #690e00;
 @secbackground: #FFFFFF;
@@ -27,11 +28,19 @@
 @footerwidth: 100%;
 @footerheight: 90px;
 
-.border-radius {
-	-webkit-border-radius: 10px;
-	-moz-border-radius: 10px;
-	border-radius: 10px;
-	border: 1px solid black;
+
+// Mixins
+
+.border-radius ( @radius: 1px ) {
+	-webkit-border-radius: @radius;
+	-moz-border-radius: @radius;
+	border-radius: @radius;
+}
+
+.transition {
+	 -webkit-transition: all 0.2s ease;
+	-moz-transition:    all 0.2s ease;
+	-o-transition:      all 0.2s ease;
 }
 
  /* html5 elements */
@@ -50,7 +59,6 @@ html, body {
 	padding: 0px;
 	margin: 0px;
 	background-color: @secbackground;
-
 }
 
 header.above,
@@ -86,20 +94,35 @@ header.top {
 	text-align: center;
 	width: 100%;
 	background-color: @primbackground;
-
+	font-size: 1em;
+	text-transform: uppercase;
 	.admin {
 		.right;
-		font-size: 0.8em;
-		padding-right: 1em;
-		padding-top: 1em;
+		margin-right: 1em;
+		margin-top: 1em;
+		padding: 1px;
+		.border-radius(5px);
+		background: white;
+		a {
+			color: black;
+			text-decoration: none;
+			text-transform: lowercase;
+			font-size: 0.9em;
+		}
+	}
+	&:hover {
+		background-color: lighten(@primbackground, 5%);
+		font-size: 1em;
+
 	}
 }	
+		
 		
 nav.menu {
 	width: 100%;
 	margin: 0 auto;
 	padding: 1em 0;
-
+	.transition;
 	a {
 		font-family: 'Oleo Script', cursive;
 		text-align: center;
@@ -250,7 +273,22 @@ legend.login {
 	 
 }
 
+div.debug {
+	background: white;
+	color: black;
+	width: 100%;
+	font-size: 0.5em;
+	padding: 0.2em;
+	&:hover {
+		font-size: 1em;
+	}
+}
  
+textarea.editor {
+	width: 100%;
+	height: 300px;
+	font-size: 1em;
+}
 
  /*	media queries (development)	*/
 /*_____________________________*/

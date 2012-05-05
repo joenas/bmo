@@ -8,38 +8,47 @@ error_reporting(-1);
 session_name(preg_replace('/[:\.\/-_]/', '', __FILE__));
 session_start();
 
-define( 'DEFAULTPAGE', 		'home');
-define( 'DEFAULT_TITLE', 	'BMO - Begravningsmuseum Online');
-define( 'EXTENSION',		'.php');
-define( 'CLASS_EXT',		'.php');
-define( 'SEPARATOR',		'/');
-define( 'CSS', 				'css/');
-define( 'IMG',				'img/');
+// Page settings
+define( 'DEFAULT_CONTROLLER', 		'home' );
+define( 'DEFAULT_METHOD',				'index');
+define( 'DEFAULT_TITLE', 	'BMO - Begravningsmuseum Online' );
+define( 'EXTENSION',		'.php' );
+define( 'SEPARATOR',		'/' );
+define( 'CSS', 				'css/' );
+define( 'IMG',				'img/' );
+define( 'PAGES',			APP . 'pages/' );
+define( 'TEMPLATE',		PAGES . 'template.php' );
 
-define( 'CORE', 			APP.'core/');
-define( 'DATABASE', 		APP.'database/');
-define( 'PAGES',			APP.'pages/');
-//define( 'FUNCTIONS', 		APP.'function/' );
+// Database settings
+define( 'DB_PATH', 		APP . 'database/');
+define( 'DATABASE',		DB_PATH . 'bmo.sqlite');
+define( 'DSN',				'sqlite:' . DATABASE);
 
-define( 'CONTROLLER_PREFIX', 	'Controller_');  		// File prefix
-define( 'MODEL_PREFIX',			'Model_');				// File prefix
-define( 'VIEW_PREFIX',			'View_');
+// Core and autoloader 
+define( 'CORE', 			APP . 'core/' );
+define( 'CONTROLLER_PREFIX', 	'Controller_' );  		// File prefix
+define( 'MODEL_PREFIX',			'Model_' );				// File prefix
+define( 'VIEW_PREFIX',			'View_' );
+define( 'CLASS_EXT',		'.php' );
 
-define( 'DB_PATH',			DATABASE.'bmo.sqlite');	
+
 
 // Autoloader for classes
 //----------------------------------------------------
 
 function autoloader($className) {
+	// ie 'pages/Example' if class is Controller_Example
 	$classPath = PAGES.substr($className, strpos($className, "_")+1).SEPARATOR;
 
+	// Check in 'core/' 
 	if (is_file( CORE.$className.CLASS_EXT )) {
 		require_once( CORE.$className.CLASS_EXT );
 	}	
+	// Check in 'pages/Example/'
 	elseif (is_file( $classPath.$className.CLASS_EXT )) {
 		require_once( $classPath.$className.CLASS_EXT );
 	}
-	//else die("Class file for <code>".$className."</code> not found.");
+	//else die("Error in ".__FILE__.": Class file for <code>".$className."</code> not found in " . $classPath);
 }
 
 spl_autoload_register('autoloader');

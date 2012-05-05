@@ -2,37 +2,26 @@
 
 class Database {
 	
-	private $dataPath;
-	private $isWritable;
-	private $dirIsWritable;
 	private $db = null;
 	private $stmt = null;
 	private static $numQueries = 0;
 	private static $queries = array();	
+	private static $instance;
 
-	public function __construct() {
-
-		$this->dataPath = ROOT.DB_PATH;
-//		$this->dataPath = rtrim($this->$dataPath, '/');
-		$this->isWritable = is_writable($this->dataPath);
-		$this->dirIsWritable = is_writable(dirname($this->dataPath));
-
-		if (is_file($this->dataPath)) // Database exists, open connection
-		{
-			$this->db = new PDO('sqlite:'.$this->dataPath);
-			$this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING); // Display errors, but continue script
+	public static function Instance() {
+		if(self::$instance == null) {
+			self::$instance = new Database(DSN);
 		}
-
+		return self::$instance;
 	}
 
-	public function isWritable() {
-		return $this->isWritable;
+	private function __construct($dsn, $username = null, $password = null, $driver_options = null) {
+		try { 
+			$this->db = new PDO($dsn, $username, $password, $driver_options);
+		} catch (PDOException $e) {
+    	echo 'Connection failed: ' . $e->getMessage();
+		}
 	}
-
-	public function dirIsWritable() {
-		return $this->dirIsWritable;
-	}
-
 
 	/**
  	* Getters

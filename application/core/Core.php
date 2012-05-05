@@ -2,97 +2,54 @@
 
 class Core {
 
-	public function Route($request) {
+	public function route() {
 
-		// Require site functions
-//		require_once ( FUNCTIONS.'FCommon.php' );
-//		require_once ( FUNCTIONS.'FLoginsrc.php' );
+		// Parse the request.
+		$request = new Request();
+		$request->Parse();
 
-		$this->baseDir = $request->baseDir;
+		// Capitalize first letter, 'Index' instead of 'index' etc
+		$controllerName = ucfirst($request->controller);
+		$method = $request->method;
 
-		// Index instead of index etc
-		$this->page = ucfirst($request->page);
+		// ie Controller_Example
+		$controllerClass = CONTROLLER_PREFIX.$controllerName;
 
-		// Classes for page
-		$controllerClass = CONTROLLER_PREFIX.$this->page;
-		$modelClass = MODEL_PREFIX.$this->page;
+		if (!class_exists($controllerClass)) 
+		{
+			// ie 404, no page found
+			$this->controller = new CoreController();
+			$this->controller->index();	
 
-		if (class_exists($controllerClass)) {
-
+		} else {
+			// Create the controller
 			$this->controller = new $controllerClass;
+			$this->controller->name = $controllerName;
 
-			// So we can always access modelClass by $this->modelClass in controllerClass
-			if (class_exists($modelClass)) {
-				$this->controller->modelClass = $modelClass;
+			// Give controller Debug capabilities
+			$this->controller->debug = Debug::Instance();
+
+			// Give controller Helper capabilites
+			$this->controller->helper = ViewHelper::Instance();
+
+			// Give arguments
+			$this->controller->baseUrl = $request->baseUrl;	
+			$this->controller->arguments = $request->arguments;
+
+			// Look for method, otherwise fall back to index()
+			if (method_exists($this->controller, $method)) {				
+				//$this->controller->debug->message("calling {$method}", __LINE__, __FILE__);
+				$this->controller->$method();
+			} else {
+				$this->controller->debug->message("calling default index()", __LINE__, __FILE__);
+				$this->controller->index();
 			}
-			// Safe to call method
-			if ($this->controller instanceof iController) {
-				$this->controller->Route($request);
-			}
-			else die("Class $controllerClass doesnt not implement iController");
+
+			// Let controller render its View
+			$this->controller->render();
+
 		}
-
-	}
-
-	public function Render() {
-
-		// For example pages/Report/
-		$path = PAGES.$this->page.SEPARATOR;
-
-    	// Content file, View_Report.php etc. Required in template.php
-    	$view = $path.VIEW_PREFIX.$this->page.'.php';
-
-		// Available?
-    	if ( !is_file($view) ) 
-    	{
-    		$view = PAGES.'404.php';
-    		$title = "404";
-    	}
-    	/* 
-    	If property exists, class is loaded and implements 
-    	iController so calling GetData should be safe
-    	*/
-		else if ( property_exists($this, 'controller') ) {
-			extract($this->controller->GetData());
-		}
-
-		// Template file, ie print the page
-		require( PAGES.'template.php' );
-
-	}
-
-	public function Link($link, $type = 'href', $aBaseDir = null) {
-
-		// If provided with new basedir, use that. Otherwise check for root and alter or use regular			
-		$baseDir = ( isset($aBaseDir) ) ? $aBaseDir : ($this->baseDir=='/') ? '' : $this->baseDir;
-		print $type . "='$baseDir/$link'";
-	
-	}
-
-	public function SourceLink($pageFile) {
-		print "<a href='".$this->baseDir."/source?dir=".dirname($pageFile)."&amp;file=".basename($pageFile)."'>Källkod</a>";
-	}
-
-	public function RandomImage() {
-
-		$aPath = ($this->baseDir=='/') ? 'img/250/' : $this->baseDir.'img/250/';	
-		
-		$list = Array();
-		if(is_dir($aPath)) {
-			if ($dh = opendir($aPath)) {
-				while (($file = readdir($dh)) !== false) {
-					if(is_file("$aPath/$file") && $file != '.htaccess') {
-						$list[$file] = "$file";
-					}
-				}
-				closedir($dh);
-			}
-		}
-		sort($list, SORT_STRING);
-		$image = $list[rand(0, count($list)-1)];
-
-		return "<div class='randimage'><img src='/{$aPath}{$image}' alt=''></div>";
-
+		// Finished
 	}
 
 }

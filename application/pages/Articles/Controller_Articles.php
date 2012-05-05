@@ -1,6 +1,6 @@
 <?php 
 
-class Controller_Articles implements iController {
+class Controller_Articles extends CoreController {
 
 	public function __contruct() { }
 

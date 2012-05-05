@@ -2,20 +2,20 @@
 
 class Request {
 	
-	public $baseDir;
-	public $page;
-	public $action;
+	public $baseUrl;
+	public $controller;
+	public $method;
 	public $args;
 
 	// Function for parsing the request string.
 	//-------------------------------------------
 	public function Parse() {
 
-		// Get request and base dir
+		// Get request and baseUrl dir
 		$requestUri = $_SERVER['REQUEST_URI'];
 		$scriptName = $_SERVER['SCRIPT_NAME'];
-		$baseDir = dirname($scriptName);
-		$request = trim( substr($requestUri, strlen(rtrim($baseDir, '/'))), '/' );
+		$baseUrl = dirname($scriptName);
+		$request = trim( substr($requestUri, strlen(rtrim($baseUrl, '/'))), '/' );
 
 		// Get query part of request
 		$query = "";
@@ -28,17 +28,19 @@ class Request {
 		// Split request
 		$splits = explode('/', $request);
 
-		// Set page and action 
-		$page =  !empty($splits[0]) ? $splits[0] : DEFAULTPAGE;
-		$action =  !empty($splits[1]) ? $splits[1] : '';
+		// Set controller and method 
+		$controller = !empty($splits[0]) ? $splits[0] : DEFAULT_CONTROLLER;
+		$method = !empty($splits[1]) ? $splits[1] : DEFAULT_METHOD;
+		$arguments = $splits;
+    unset($arguments[0], $arguments[1]);
+		
+		$this->baseUrl = $baseUrl;
+		$this->controller = $controller;
+		$this->method = $method;
+		$this->arguments = $arguments;
 
-		$this->baseDir = $baseDir;
-		$this->page = $page;
-		$this->action = $action;
-		$this->args = $splits;
-
-//		echo "<strong>\$requestUri= $requestUri, \$scriptName= $scriptName, \$baseDir = $baseDir, \$request = $request, \$query = $query<br>";
-//		echo "\$page = $this->page, \$action = $this->action</strong><br><br>";
+//		echo "<strong>\$requestUri= $requestUri, \$scriptName= $scriptName, \$baseUrl = $baseUrl, \$request = $request, \$query = $query<br>";
+//		echo "\$controller = $this->controller, \$method = $this->method</strong><br><br>";
 
 	}
 }

@@ -1,6 +1,6 @@
 <?php 
 
-class Controller_About implements iController {
+class Controller_About extends CoreController {
 
 	public function __contruct() { }
 
@@ -17,11 +17,11 @@ class Controller_About implements iController {
 
 	public function Route($request) {
 
-		$db = new Database();
+		$db = Database::Instance();
 
 		$article = new Article($db);
 
-		$res = $article->getArticle('4');
+		$res = $article->getArticle('about');
 		$this->viewData['id'] = $res[0]['id'];
 		$this->viewData['view_title'] = $res[0]['title'];
 		$this->viewData['view_content'] = $res[0]['content'];		

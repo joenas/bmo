@@ -10,20 +10,15 @@
 ---------------------------------------------------------------------*/
 
 // The application install directory
-define( 'ROOT', dirname(__FILE__).'/');
-define( 'APP', 'application/');
-require(APP.'config.php');
+define( 'ROOT', dirname(__FILE__).'/' );
+define( 'APP', 'application/' );
+require( APP.'config.php' );
 
-// Parse the request.
-$request = new Request();
-$request->Parse();
-
-// Create the Core object and generate the page.
+// Create the Core object and render the page.
 //----------------------------------------------------
 
 $core = new Core();
-$core->Route($request);
-$core->Render();
+$core->route();
 
 //----------------------------------------------------
 

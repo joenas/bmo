@@ -16,7 +16,8 @@ class Article {
 	} 		
 	
 	public function getArticle($id) {
-		$query = 'SELECT * FROM ' . self::$table . ' where id=?';
+		$query = 'SELECT * FROM ' . self::$table . " where id=? or category=?";
+		$params[] = $id;
 		$params[] = $id;
 		return $this->db->ExecuteSelectQueryAndFetchAll($query, $params);
 	} 

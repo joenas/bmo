@@ -15,11 +15,10 @@ class Object {
 	} 		
 	
 	public function getObject($id) {
-		$query = 'SELECT * FROM ' . self::$table . ' where id=?';
+		$query = 'SELECT * FROM ' . self::$table . " where id=? or category=?";
 		$params[] = $id;
 		return $this->db->ExecuteSelectQueryAndFetchAll($query, $params);
 	} 
-
 	
 }
 
