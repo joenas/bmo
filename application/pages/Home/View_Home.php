@@ -2,11 +2,12 @@
 
   <!-- primary content -->
   <div class="primary">
+  
   <?php echo $this->helper->RandomImage(); ?>
 
-	<article>
+	<article class="home">
 	<h1><?php echo $view_title; ?></h1>
-	<p><?php echo $view_content; ?></p>
+	<?php echo $view_content; ?>
 	</article>
   </div>
 

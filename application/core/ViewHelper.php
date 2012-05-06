@@ -16,7 +16,6 @@ class ViewHelper {
 		$request = new Request();
 		$request->Parse();
 		$this->baseUrl = $request->baseUrl;
-
 	}
 
 	public function Link($link, $type = 'href', $abaseUrl = null) {
@@ -27,16 +26,12 @@ class ViewHelper {
 	
 	}
 
-	public function SourceLink($pageFile) {
-		print "<a href='".$this->baseUrl."/source?dir=".dirname($pageFile)."&amp;file=".basename($pageFile)."'>Källkod</a>";
-	}
-
 	public function RandomImage() {
 
-		$aPath = ($this->baseUrl=='/') ? 'img/250/' : $this->baseUrl.'img/250/';	
+		$aPath = ($this->baseUrl=='/') ? 'img/550/' : $this->baseUrl.'img/250/';	
 		$list = $this->ReadDirectory($aPath);
 		$image = $list[rand(0, count($list)-1)];
-		return "<div class='randimage'><img src='/{$aPath}{$image}' alt=''></div>";
+		return "<div class='randimage'><img width=220 src='/{$aPath}{$image}' alt=''></div>";
 
 	}
 

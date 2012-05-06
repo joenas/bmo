@@ -2,13 +2,17 @@
 
   <!-- primary content -->
   <div class="primary">
-	<article>
-	<h1>Artiklar</h1>
-	<p>Här kan du läsa alla artiklar.</p>
+     <?php echo $this->helper->RandomImage(); ?>
+ 
+	<article class="articles">
+  <?php echo isset($view_article_list) ? $view_article_list : ''; ?>
+  <?php echo isset($view_article) ? $view_article : ''; ?>
+
 	</article>
   </div>
 
   <!-- secondary content -->
   <div class="secondary">
-	<p>Här kan man ha länkar.</p>
+	<?php echo isset($view_article_sidebar) ? $view_article_sidebar : ''; ?>
+
   </div>

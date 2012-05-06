@@ -4,17 +4,14 @@ class Controller_Gallery extends CoreController {
 
 	public function __contruct() { }
 
-	// Returns the array with data for view page
-	public function GetData() {
-
-		$this->viewData['pageId'] = "gallery";
-		$this->viewData['pageStyle'] = '';
-
-		return $this->viewData;
-		
+	public function getData() {
+		$this->data['pageId'] = "gallery";
+		$this->data['title'] = "Galleri";
+		$this->data['pageStyle'] = '';
+		return $this->data;
 	}
 
-	public function Route($request) {
+	public function index() {
 
 	}
 	

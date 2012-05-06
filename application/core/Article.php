@@ -22,7 +22,12 @@ class Article {
 		return $this->db->ExecuteSelectQueryAndFetchAll($query, $params);
 	} 
 
-	
+	public function getAllArticlesByCategory($category) {
+		$query = 'SELECT * FROM ' . self::$table . " where category=?";
+		$params[] = $category;
+		return $this->db->ExecuteSelectQueryAndFetchAll($query, $params);
+	}
+
 }
 
 

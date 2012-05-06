@@ -14,7 +14,7 @@ define( 'ROOT', dirname(__FILE__).'/' );
 define( 'APP', 'application/' );
 require( APP.'config.php' );
 
-// Create the Core object and render the page.
+// Create the Core object and route
 //----------------------------------------------------
 
 $core = new Core();

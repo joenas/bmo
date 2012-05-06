@@ -1,14 +1,15 @@
-// http://colorschemedesigner.com/#0651BNhlAK-00
+// http://colorschemedesigner.com/#5t51B--iOK-00
 
 @import url(forms.css);
 @import url(source.css);
 
-@primbackground: #690e00;
+//@primbackground: #690e00;
+@primbackground: #8A0020;
 @secbackground: #FFFFFF;
 
-@primtextcolor: #692200;
-@sectextcolor: #778899;
-@linkcolor: #a4a5a6;
+@primtextcolor: #960400;
+@sectextcolor: black;
+@linkcolor: #960400;
 
 // menu
 @menulinkcolor: #321000;
@@ -18,16 +19,19 @@
 @footerbackground: @primbackground;
 @footerlinkcolor: #321000;
 @footerhovercolor: white;
-@footertextcolor: white;
 
 @pagewidth: 90%;
 @divprimwidth: 85%;
-@divsecwidth: 100 - @divprimwidth;
-@divimagewidth: 25%;
+@divsecwidth: 15%;
+@divimagewidth: 220px;
 
 @footerwidth: 100%;
 @footerheight: 90px;
 
+// Fonts
+.bilbo { font-family: 'Bilbo Swash Caps', cursive; }
+.nothing { 	font-family: 'Nothing You Could Do', cursive;	 }
+.karla {	font-family: 'Karla', sans-serif; }
 
 // Mixins
 
@@ -59,6 +63,7 @@ html, body {
 	padding: 0px;
 	margin: 0px;
 	background-color: @secbackground;
+	color: @sectextcolor;
 }
 
 header.above,
@@ -69,12 +74,23 @@ div.mainwrapper {
 
 body {
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-family: 'Trocchi', serif;		
 	font-size: 0.9em;
 }
 
-a { color: @linkcolor; }
+a { 
+	color: @linkcolor; 
+	text-decoration: none;
+	&:hover {
+		text-decoration: underline;
+	}
+}
 
-p { word-wrap: break-word; }
+p { 
+	word-wrap: break-word; 
+	font-size: 1.1em;
+	.karla;
+}
 
 h1 {
 	font-size: 1.5em;
@@ -93,27 +109,9 @@ h1 {
 header.top {
 	text-align: center;
 	width: 100%;
-	background-color: @primbackground;
-	font-size: 1em;
-	text-transform: uppercase;
-	.admin {
-		.right;
-		margin-right: 1em;
-		margin-top: 1em;
-		padding: 1px;
-		.border-radius(5px);
-		background: white;
-		a {
-			color: black;
-			text-decoration: none;
-			text-transform: lowercase;
-			font-size: 0.9em;
-		}
-	}
+	background-color: lighten(@primbackground, 5%);	font-size: 1em;
 	&:hover {
-		background-color: lighten(@primbackground, 5%);
 		font-size: 1em;
-
 	}
 }	
 		
@@ -124,7 +122,8 @@ nav.menu {
 	padding: 1em 0;
 	.transition;
 	a {
-		font-family: 'Oleo Script', cursive;
+		.karla;
+		text-transform: uppercase;
 		text-align: center;
 		color: @menulinkcolor;
 		padding:0 0.5em;
@@ -147,24 +146,17 @@ body#about a#about-
 	font-weight: 700;
 }	
 
-		
  /*	logo */
 /*______*/
 
 header.logo {
-	font-family: 'Bilbo Swash Caps', cursive;
-	font-family: 'Oleo Script', cursive;
-	//font-family: 'Great Vibes', cursive;
-	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	.nothing;
 	text-align: center; 
-	width: 100%;
-	color: black;
 	margin-top: 2em;
 	margin-bottom: 2em;
 	h5 {
-		font-style: normal;
 		font-weight: normal;
-		font-size: 2.5em;
+		font-size: 3.5em;
 		margin: 0px;
 	}
 }
@@ -178,26 +170,46 @@ div.stickfootwrap {
 
 div.mainwrapper {
 	width: @pagewidth;
-	min-height: 35em;
 	background-color: @secbackground;
-	overflow:auto;
 	padding-bottom: @footerheight;
+	min-height: 35em;
 }
 
 div.randimage {
 	.left;
 	margin-right: 2em;
+	margin-top: 3em;
 	width: @divimagewidth;
+	overflow: auto;
+	border: 1px solid black;
+	.border-radius(10px);
 }
 
 div.primary {
 	.left;
 	width: @divprimwidth;
+	overflow: auto;
+	h1 {
+		margin-top: 0px;
+		font-size: 1.2em;
+	}
 }
 	
 div.secondary {
 	.right;
 	width: @divsecwidth;
+	ul {
+		padding: 0.5em;
+	}
+	a {
+		text-decoration: none;
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+	h2 { 
+		.nothing; 
+	}
 }
 
 footer.byline {
@@ -214,46 +226,90 @@ div.footer {
 	height: @footerheight;
 	background-color: @footerbackground;	
 	border-top: 1px solid black;
-	clear:both;
+	clear: both;
 }
 
 // actual content container
 footer.bottom {
-	width: @footerwidth;
-	clear: both;
-	margin: 0 auto;
+	//width: @footerwidth;
 	text-align: center;
-	padding-top: 1em;
 	a {
 		text-decoration: none;
-		margin: 0 0.7em;
+		margin: 0 0.5em;
 		color: @footerlinkcolor;
 		&:hover {
 			color: @footerhovercolor;
-			background: @primbackground;
 		}
 	}
 	p {
-		color: @footertextcolor;
+		margin: 0px;
 	}
 }
 
-@footmargin: 1em 0;
+@footmargin: @footerheight/3 0;
+
 div.leftfoot {
+	height: @footerheight/3;
 	width:50%;
 	.left;
 	margin: @footmargin;
 }
 
 div.rightfoot {
+	height: @footerheight/3;
 	width: 50%;
 	.right;
-	margin: @footmargin;
+	margin: 20px 0;
+	font-size: 0.7em;
 }
 
  /* Page styling classes */
  /*_____________________*/
 
+
+article {
+		width: 70%;
+		.left;
+
+	&.admin {
+		width: 80%;
+		.right;
+		margin-right: 3em;
+	}
+	&.about {
+	}
+
+	&.articles {
+		h3, h2 {
+			display: inline;
+		}
+		.date {
+			font-size: 0.7em;
+		}
+		.articlefooter {
+			.right;
+			margin-top: 1em;
+			font-style: italic;
+		}
+		div.spacer {
+			border-top: 1px #960400 solid; 
+			margin: 2em auto; 
+			width: 80%; 
+		}
+	}
+	
+	&.home {
+		blockquote {
+			font-style: italic;
+			color: lighten(@sectextcolor, 30%);
+		}
+	}
+
+	&.objects {
+
+	}
+
+}
 
 form.login {
 	width: 450px;
@@ -264,13 +320,11 @@ legend.login {
 	color: @primtextcolor;
 }
 
-
  /* direct styling classes */
 /*________________________*/
 
  .error, .alert, .notice, .success, .info { 
- 	margin: 1.5em 0;
-	 
+ 	margin: 1.5em 0; 
 }
 
 div.debug {

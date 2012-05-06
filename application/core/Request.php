@@ -5,7 +5,7 @@ class Request {
 	public $baseUrl;
 	public $controller;
 	public $method;
-	public $args;
+	public $arguments;
 
 	// Function for parsing the request string.
 	//-------------------------------------------
@@ -38,9 +38,6 @@ class Request {
 		$this->controller = $controller;
 		$this->method = $method;
 		$this->arguments = $arguments;
-
-//		echo "<strong>\$requestUri= $requestUri, \$scriptName= $scriptName, \$baseUrl = $baseUrl, \$request = $request, \$query = $query<br>";
-//		echo "\$controller = $this->controller, \$method = $this->method</strong><br><br>";
 
 	}
 }

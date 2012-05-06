@@ -38,7 +38,6 @@ class Controller_Admin extends CoreController {
 		if ($this->authenticated===false) {
 				// Default action, show the login form
 				$this->data['loginView'] = $this->login->userLoginForm($this->baseUrl);
-				$this->data['pageStyle'] = "div.primary { width: 100%; } div.secondary { display: none; }";
 		} 
 		// User is logged in
 		else {
@@ -51,14 +50,28 @@ class Controller_Admin extends CoreController {
 
 		if ($this->authenticated===false) {
 			$this->index();
-		} else {
-			$this->data['pageStyle'] = "div.primary { width: 70%; margin-left: 5em; }";
+		} else {			
 			$type = isset($this->arguments[2]) ? $this->arguments[2] : null;
+
+			// Check for id in $_POST first, then request URL 
 			$id = !isset($_POST['editId']) ?  isset($this->arguments[3]) ? $this->arguments[3] : null : $_POST['editId'];
 			$editor = new View_Admin_Helper($type, $id, $this->baseUrl);
 			$this->data['editView'] = $editor->SetupView();
 		}
 
+	}	
+
+	public function add() {
+		if ($this->authenticated===false) {
+			$this->index();
+		} else {			
+			$type = isset($this->arguments[2]) ? $this->arguments[2] : null;
+
+			// Check for id in $_POST first, then request URL 
+			$id = !isset($_POST['editId']) ?  isset($this->arguments[3]) ? $this->arguments[3] : null : $_POST['editId'];
+			$editor = new View_Admin_Helper($type, $id, $this->baseUrl);
+			$this->data['editView'] = $editor->SetupView();
+		}		
 	}
 
 	// Login
@@ -75,7 +88,6 @@ class Controller_Admin extends CoreController {
 														"Du lyckades ej logga in. Felaktigt konto eller lösenord.", 
 														"error"
 														);
-			$this->data['pageStyle'] = "div.primary { width: 100%; } div.secondary { display: none; }";
 		}
 
 	}

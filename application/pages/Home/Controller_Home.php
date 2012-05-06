@@ -31,10 +31,6 @@ class Controller_Home extends CoreController {
 
 	}
 
-	public function test() {
-		echo "test";
-	}
-	
 }
 
 ?>

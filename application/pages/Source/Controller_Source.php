@@ -6,12 +6,11 @@ class Controller_Source extends CoreController {
 	 	;
 	}
 
-	public function Route($request) {
+	public function index() {
 
 	}
 
-
-	public function GetData() {
+	public function getData() {
 
 		$this->data['title'] = "Visa källkod";
 		$this->data['pageId'] = "source";

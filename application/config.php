@@ -26,8 +26,8 @@ define( 'DSN',				'sqlite:' . DATABASE);
 
 // Core and autoloader 
 define( 'CORE', 			APP . 'core/' );
-define( 'CONTROLLER_PREFIX', 	'Controller_' );  		// File prefix
-define( 'MODEL_PREFIX',			'Model_' );				// File prefix
+define( 'CONTROLLER_PREFIX', 	'Controller_' );
+define( 'MODEL_PREFIX',			'Model_' );	
 define( 'VIEW_PREFIX',			'View_' );
 define( 'CLASS_EXT',		'.php' );
 
@@ -38,15 +38,16 @@ define( 'CLASS_EXT',		'.php' );
 
 function autoloader($className) {
 	// ie 'pages/Example' if class is Controller_Example
-	$classPath = PAGES.substr($className, strpos($className, "_")+1).SEPARATOR;
+	$split = explode('_', $className);
+	$classPath = isset($split[1]) ? PAGES.$split[1] : null;
 
 	// Check in 'core/' 
 	if (is_file( CORE.$className.CLASS_EXT )) {
 		require_once( CORE.$className.CLASS_EXT );
 	}	
 	// Check in 'pages/Example/'
-	elseif (is_file( $classPath.$className.CLASS_EXT )) {
-		require_once( $classPath.$className.CLASS_EXT );
+	elseif (is_file( "{$classPath}/{$className}.php" )) {
+		require_once( "{$classPath}/{$className}.php" );
 	}
 	//else die("Error in ".__FILE__.": Class file for <code>".$className."</code> not found in " . $classPath);
 }

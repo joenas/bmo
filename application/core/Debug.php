@@ -29,7 +29,6 @@ class Debug {
 	}
 
 	public function output() {
-		//var_dump($this->data);
 		if (isset($this->data)) {
 			$html = "<div class='debug'>";
 			foreach ($this->data as $val) {

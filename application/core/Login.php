@@ -141,7 +141,6 @@ EOD;
   //
   public function userLogout() {
     unset($_SESSION['authenticated']);
-    //redirectPage('login/loggedout');
   }
 
 

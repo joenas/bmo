@@ -10,8 +10,8 @@ class CoreController {
 		exit;
 	}
 
-	public function getdata() { 
-		return $this->data; 
+	public function getData() {
+		return $this->data;
 	}
 
 	// Rendering method
@@ -28,8 +28,10 @@ class CoreController {
     $this->view = $path.VIEW_PREFIX.$view.'.php';
 
     // Get the data from controller
-		extract($this->data);
-
+    if (method_exists($this, 'getData')) {
+    	extract($this->getData());
+    }
+		
 		// Template file, ie print the page
 		require( TEMPLATE );
 
