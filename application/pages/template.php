@@ -15,6 +15,8 @@
   <link href='http://fonts.googleapis.com/css?family=Bilbo+Swash+Caps|Trocchi|Karla|Nothing+You+Could+Do' rel='stylesheet' type='text/css'>
 
 	<script <?php $this->helper->Link('js/less.js', 'src');?> type="text/javascript"></script>
+	<script <?php $this->helper->Link('js/jquery-1.7.1.js', 'src');?> type="text/javascript"></script>
+	
 
 	<!-- $pageStyle for additional style -->
 	<?php if(isset($pageStyle)) : ?>

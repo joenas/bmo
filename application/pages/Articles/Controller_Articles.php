@@ -14,7 +14,7 @@ class Controller_Articles extends CoreController {
 	}
 
 	public function index() {
-	
+		
 		// The main View
 		$this->data['view_article_list'] = $this->viewHelper->articleList();
 		// The sidebar

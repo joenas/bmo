@@ -10,25 +10,16 @@ class Controller_Admin extends CoreController {
 
 	public function __construct() { 
 		
-		spl_autoload_register(array($this, 'editloader'), true, true);	
-
 		// Login functionality.
 		//----------------------
 		$this->login = new Login;
 		$this->authenticated = $this->login->userIsAuthenticated();
-		//var_dump($this->authenticated);
-		//echo ($this->authenticated!==false) ? "inloggad" : "ej inloggad";
 
 		// Basic variables for template
 		$this->data['pageId'] = "admin";
 		$this->data['title'] = "BMO Admin";
+		$this->data['pageStyle'] = "header.logo { display: none; }"; 
 		
-	}
-
-	function editloader($className) {
-		if (is_file( dirname(__FILE__).SEPARATOR.$className.'.php' )) {
-			require_once( dirname(__FILE__).SEPARATOR.$className.'.php' );
-		}	
 	}
 
 	// Default View
@@ -48,30 +39,85 @@ class Controller_Admin extends CoreController {
 	// Editor view, requires that user is logged in
 	public function edit() {
 
+		//var_dump($_POST);
+
 		if ($this->authenticated===false) {
 			$this->index();
-		} else {			
+		} else {
+			$message = isset($this->message) ? $this->message : null;
 			$type = isset($this->arguments[2]) ? $this->arguments[2] : null;
 
-			// Check for id in $_POST first, then request URL 
+			// Check for id in $_POST first, then in request URL 
 			$id = !isset($_POST['editId']) ?  isset($this->arguments[3]) ? $this->arguments[3] : null : $_POST['editId'];
-			$editor = new View_Admin_Helper($type, $id, $this->baseUrl);
-			$this->data['editView'] = $editor->SetupView();
+			//$action = (isset($id)) ? 'update' : 'edit';
+			$viewHelper = new View_Admin_Helper('update', $type, $id, $this->baseUrl);
+			$this->data['editView'] = $viewHelper->EditorView($message);
 		}
 
 	}	
 
 	public function add() {
+
 		if ($this->authenticated===false) {
 			$this->index();
-		} else {			
-			$type = isset($this->arguments[2]) ? $this->arguments[2] : null;
+		} else if (isset($this->arguments[2])) {
+			$type = $this->arguments[2];
 
-			// Check for id in $_POST first, then request URL 
-			$id = !isset($_POST['editId']) ?  isset($this->arguments[3]) ? $this->arguments[3] : null : $_POST['editId'];
-			$editor = new View_Admin_Helper($type, $id, $this->baseUrl);
-			$this->data['editView'] = $editor->SetupView();
+			$viewHelper = new View_Admin_Helper('add', $type, null, $this->baseUrl);
+			$this->data['addView'] = $viewHelper->addView();
 		}		
+	}
+
+	//($id, $title, $category, $author, $pubdate, $content)
+	public function update() {
+
+		if ($this->authenticated===false || !isset($_POST['save'])) {
+			$this->index();
+		}	else if ( isset($_POST['save']) && $_POST['save']==true) {
+			$db = Database::Instance();
+			$article = new Article($db);
+			$res = $article->updateArticle($_POST['id'], $_POST['title'],$_POST['category'],$_POST['author'],$_POST['pubdate'],$_POST['content']);
+			$this->message = "Artikeln har uppdaterats.";
+			$this->arguments[2] = 'article';
+			$this->arguments[3] = $_POST['id'];
+			$this->edit();
+		}
+	}
+
+	public function delete() {
+		if ($this->authenticated===false) {
+			$this->index();
+		}	else if ( isset($_POST['delete']) && $_POST['delete']==true) {
+			$db = Database::Instance();
+			switch ($_POST['type']) {
+				case "article";
+					$article = new Article($db);
+			}
+			$object = ($_POST['type']=='article') ? new Article($db) : new Object($db);
+			
+		}
+	}
+
+	public function insert() {
+		if ($this->authenticated===false) {
+			$this->index();
+		} else if (isset($_POST['save']) && $_POST['save']==true) { 
+			$db = Database::Instance();
+			$article = new Article($db);
+			$res = $article->createArticle( $_POST['title'], $_POST['category'], 
+																			$_POST['author'], $_POST['pubdate'], $_POST['content'] );
+			if ($res!=='0') {
+				$this->message = "Artikeln har uppdaterats.";
+				$this->arguments[2] = 'article';
+				$this->arguments[3] = $_POST['id'];
+				$this->edit();
+			}
+			else {
+				;
+			}
+			var_dump($res);
+			var_dump($_POST);
+		}
 	}
 
 	// Login
@@ -83,11 +129,10 @@ class Controller_Admin extends CoreController {
 		if ($res!==false) {
 			$this->redirectPage('admin');
 		} else {
-			$this->data['loginView'] = 	$this->login->userLoginForm(
-														$this->baseUrl, 
-														"Du lyckades ej logga in. Felaktigt konto eller lösenord.", 
-														"error"
-														);
+			$this->data['loginView'] = 	$this->login->userLoginForm($this->baseUrl, 
+																	"Du lyckades ej logga in. Felaktigt konto eller lösenord.", 
+																	"error"
+																	);
 		}
 
 	}

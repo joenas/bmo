@@ -9,6 +9,8 @@
 
     <?php echo isset($editView) ? $editView : ''; ?>
 
+    <?php echo isset($addView) ? $addView : ''; ?>
+
   </article>
   </div>
 
@@ -19,7 +21,7 @@
       <h2>Artiklar</h2>
 
     <li>
-      <a <?php $this->helper->Link('admin/edit/article/home'); ?>>Ändra förstasidan</a>
+      <a <?php $this->helper->Link('admin/edit/article/7'); ?>>Ändra förstasidan</a>
     </li>   
     <li>
       <a <?php $this->helper->Link('admin/edit/article'); ?>> Ändra artikel</a>
@@ -41,3 +43,4 @@
   </ul>
 <?php endif; ?>
   </div>
+  <script <?php $this->helper->Link('js/admin.js', 'src');?> type="text/javascript">Den här sidan kräver javascript</script>

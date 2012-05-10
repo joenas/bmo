@@ -23,7 +23,7 @@ class Controller_About extends CoreController {
 
 		$article = new Article($db);
 
-		$res = $article->getArticle('about');
+		$res = $article->getArticle('about', 'category');
 		$this->data['id'] = $res[0]['id'];
 		$this->data['view_title'] = $res[0]['title'];
 		$this->data['view_content'] = $res[0]['content'];		

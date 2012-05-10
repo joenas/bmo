@@ -6,16 +6,20 @@ class View_Articles_Helper {
 		$this->baseUrl = $baseUrl;
 		$this->db = Database::Instance();
 		$this->articles = new Article($this->db);
-
 	}
 
 	// Create html for showing an article
-	public function articleView($id) {
-			$array = $this->articles->getArticle($id);
-			$html = "<h2>".$array[0]['title']."</h2>";
-			$html .= str_replace('img/', "{$this->baseUrl}img/", $array[0]['content']);
-			$html .= "<span class='articlefooter'> <small>".$array[0]['author']." - Publicerad: </small><span class='date'>".$array[0]['pubdate']."</span></span>";
-			return $html;
+	public function articleView($link) {
+			$array = $this->articles->getArticle($link, 'permalink');
+
+			if (!empty($array)) {
+				$html = "<h2>".$array[0]['title']."</h2><div class='content'>";
+				$html .= str_replace('img/', "{$this->baseUrl}img/", $array[0]['content']);
+				$html .= "</div><span class='articlefooter'> <small>".$array[0]['author']." - Publicerad: </small><span class='date'>".$array[0]['pubdate']."</span></span>";
+			} else {
+				$html = "<p>Artikeln hittades inte</p>";
+			}
+			return $html;			
 	}
 
 	// Create a nice list of articles
@@ -27,7 +31,7 @@ class View_Articles_Helper {
 			$html .= "<h3>".$val['title']."</h3>";	
 			//$html .= " <small><em>".$val['author']." - Publicerad: </small><span class='date'>".$val['pubdate']."</span></em>";
 			$html .= substr($val['content'], 0, 250)."...";
-			$html .= " <a href='{$this->baseUrl}articles/show/".$val['id']."'>Läs mer </a>";
+			$html .= " <a href='{$this->baseUrl}articles/show/".$val['permalink']."'>Läs mer </a>";
 			$html .= "<div class='spacer'></div>";
 		}
 		return $html;
@@ -39,9 +43,9 @@ class View_Articles_Helper {
 
 		$html = "<h2>Artiklar</h2><ul>";
 		foreach ($array as $val) {
-			$html .= "<li><a href='{$this->baseUrl}articles/show/".$val['id']."'>".$val['title']."</a></li>";
+			$html .= "<li><a href='{$this->baseUrl}articles/show/".$val['permalink']."'>".$val['title']."</a></li>";
 		}
-		$html .= "<ul>";
+		$html .= "</ul>";
 		return $html;
 	}
 }

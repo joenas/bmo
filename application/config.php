@@ -27,7 +27,6 @@ define( 'DSN',				'sqlite:' . DATABASE);
 // Core and autoloader 
 define( 'CORE', 			APP . 'core/' );
 define( 'CONTROLLER_PREFIX', 	'Controller_' );
-define( 'MODEL_PREFIX',			'Model_' );	
 define( 'VIEW_PREFIX',			'View_' );
 define( 'CLASS_EXT',		'.php' );
 

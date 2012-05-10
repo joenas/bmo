@@ -5,7 +5,7 @@ class CoreController {
 	// Default method if sub-class does not have index, ie 404
 	public function index () {
 		$this->view = PAGES.'404.php';
-    $title = "404";
+		$title = "404";
 		require ( TEMPLATE );
 		exit;
 	}
@@ -24,13 +24,13 @@ class CoreController {
 		// Path is for example 'pages/Example/'
 		$path = PAGES.$view.SEPARATOR;
 
-    // Content file, 'View_Example.php' etc. Required in template.php
-    $this->view = $path.VIEW_PREFIX.$view.'.php';
+		// Content file, 'View_Example.php' etc. Required in template.php
+		$this->view = $path.VIEW_PREFIX.$view.'.php';
 
-    // Get the data from controller
-    if (method_exists($this, 'getData')) {
-    	extract($this->getData());
-    }
+		// Get the data from controller
+		if (method_exists($this, 'getData')) {
+			extract($this->getData());
+		}
 		
 		// Template file, ie print the page
 		require( TEMPLATE );
