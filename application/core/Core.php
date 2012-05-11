@@ -27,11 +27,11 @@ class Core {
 			$this->controller = new $controllerClass;
 			
 			// Add helper classes
-			$this->controllerAddons();
+			$this->controllerAddons($request);
 
 			// Give arguments and baseUrl
 			$this->controller->baseUrl = $request->baseUrl;	
-			$this->controller->arguments = $request->arguments;
+			//$this->controller->arguments = $request->arguments;
 
 			// Look for method, otherwise fall back to index()
 			if (method_exists($this->controller, $method)) {				
@@ -49,12 +49,15 @@ class Core {
 		// Finished
 	}
 
-	private function controllerAddons() {
+	private function controllerAddons($request) {
 		// Give controller Debug capabilities
 		$this->controller->debug = Debug::Instance();
 
 		// Give controller Helper capabilites
 		$this->controller->helper = ViewHelper::Instance();
+
+		// Give the controller the Request object
+		$this->controller->request = $request;
 	}
 
 }

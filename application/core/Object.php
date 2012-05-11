@@ -28,6 +28,34 @@ class Object {
 		return $this->db->ExecuteSelectQueryAndFetchAll($query, $params);
 	} 
 	
+	// Create a new Object.
+  	//-----------------------
+  	public function createObject( $title, $category, $image, $owner, $text ) {
+
+	    $query = "INSERT INTO ".self::$table." (title, category, image, owner, text) VALUES(?, ?, ?, ?, ?)";
+	    $params = array($title, $category, $image, $owner, $text);
+    	$this->db->ExecuteQuery($query, $params);
+    	return $this->db->LastInsertId();
+  	}
+
+	// Update an Object.
+	//---------------------
+	public function updateObject($id, $title, $category, $image, $owner, $text) {
+
+		$query = "UPDATE ".self::$table." SET title=?, category=?, image=?, owner=?, text=? WHERE id='{$id}'";
+		$params = array($title, $category, $image, $owner, $text);
+		$this->db->ExecuteQuery($query, $params);
+	    
+		return $this->db->LastInsertId();
+	}
+
+  	// Delete an Object.
+	//----------------------
+	public function deleteObject($id) {
+  
+		$query = "DELETE FROM ".self::$table." WHERE id='$id'";
+		$this->db->ExecuteQuery($query);
+	}	
 }
 
 

@@ -2,7 +2,7 @@
 <html lang="sv">
 <head>
 	<meta charset="utf-8">
-	<title><?php echo isset($title) ? $title : DEFAULT_TITLE;?></title>	
+	<title><?php echo isset($title) ? $title : DEFAULT_TITLE; ?></title>	
 	<link <?php $this->helper->Link(IMG.'favicon.ico');?> rel="shortcut icon">
 
 	<!-- links to external stylesheets -->
@@ -91,7 +91,7 @@ require( $this->view );
 	<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" <?php $this->helper->Link('img/html5/cc-by-sa.png', 'src');?> /></a> 
 	<a href="http://validator.w3.org/check/referer"><img alt="Valid HTML5" <?php $this->helper->Link('img/html5/HTML5_Logo_32.png', 'src'); ?>></a>
 	<a href="http://jigsaw.w3.org/css-validator/check/referer"><img height='19' <?php $this->helper->Link('img/html5/vcss-blue.gif', 'src'); ?> alt="Valid CSS!" /></a>
-	Design &copy; Jon Neverland
+	Design &copy; Jon Neverland - Version <?php echo exec('git tag'); ?>
 	</div>
 
 	</footer>

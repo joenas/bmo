@@ -111,8 +111,7 @@ h1 {
 .left { float: left; }
 .right { float: right; }
 	
- 
-		
+	
  /*	navigation menu */
 /*_________________*/	
 
@@ -176,6 +175,8 @@ header.logo {
 
 div.stickfootwrap {
 	min-height: 100%;
+//	background-color: yellow;
+	overflow: auto;
 }
 
 div.mainwrapper {
@@ -183,6 +184,8 @@ div.mainwrapper {
 	background-color: @secbackground;
 	padding-bottom: @footerheight;
 	min-height: 35em;
+//	background-color: blue;
+	overflow: auto;
 }
 
 div.randimage {
@@ -198,7 +201,6 @@ div.randimage {
 div.primary {
 	.left;
 	width: @divprimwidth;
-	overflow: auto;
 	h1 {
 		margin-top: 0px;
 		font-size: 1.2em;
@@ -305,7 +307,7 @@ article {
 		}
 		.articlefooter {
 			.right;
-			margin: 1em 0;
+			margin: 1em 0.5em;
 			font-style: italic;
 			overflow: auto;
 		}

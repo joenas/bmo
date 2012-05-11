@@ -5,11 +5,7 @@
 
   <article class="admin">
 
-    <?php echo isset ($loginView) ? $loginView : ''; ?>
-
-    <?php echo isset($editView) ? $editView : ''; ?>
-
-    <?php echo isset($addView) ? $addView : ''; ?>
+    <?php echo isset ($view) ? $view : ''; ?>
 
   </article>
   </div>

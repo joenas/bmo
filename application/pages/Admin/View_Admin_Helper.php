@@ -11,64 +11,68 @@ class View_Admin_Helper {
 		$this->type = $type;
 		$this->baseUrl = $baseUrl;
 		$this->db = Database::Instance();
-
+		$this->helper = ViewHelper::Instance();
 	}
 
 	public function addView() {
 		$fields = '';
-		if ($this->type == 'article') {
+		switch ($this->type) :
+
+		case 'article':
 			$article = new Article($this->db);
 			$fields = $article->fields;
 			$headline = "Lägg till artikel";
-		}
-		else if( $this->type == 'object') {
+			break;
+		
+		case 'object':
 			$object = new Object($this->db);
 			$fields = $object->fields;
 			$headline = "Lägg till objekt";
-		}
-	
-		return $this->SetupForm('insert', null, $headline, '', $fields);
+			break;
+
+		endswitch;
+
+		return $this->SetupForm('insert', $headline, $fields);
 	}
 
-	public function EditorView($message) {
+	public function editView($message = null) {
 		$fields = null;
-		if ($this->type == 'article') {
-			$article = new Article($this->db);
-			$res = $article->getAllArticles();
-			$dropdown = $this->SetupDropDown($res);
+		$item = null;
+		switch ($this->type) {
+
+		case 'article':
 			$headline = "Ändra artikel";
+			
+			$article = new Article($this->db);
+			$dropdown = $article->getAllArticles();
 			if (isset($this->id)) {
 				$fields = $article->fields;
-				$res = $article->getArticle($this->id, 'id');
-				//var_dump($res);
+				$item = $article->getArticle($this->id, 'id');
 			}
-		}
-		else if( $this->type == 'object') {
+			break;
+
+		case 'object':
 			$object = new Object($this->db);
-			$res = $object->getAllObjects();
-			$dropdown = $this->SetupDropDown($res);
+			$dropdown = $object->getAllObjects();
 			$headline = "Ändra objekt";
 			if (isset($this->id)) {
 				$fields = $object->fields;
-				$res = $object->getObject($this->id);
-				//var_dump($res);
+				$item = $object->getObject($this->id);
 			}
+			break;
 		}
 	
-		return $this->SetupForm('update', $message, $headline, $dropdown, $fields, $res);
-
+		return $this->setupForm('update', $headline, $fields, $dropdown, $message, $item);
 	}
 
-	private function SetupDropDown($array) {
+	private function setupDropDown($array) {
 
-		$select = "<select id='input1' name='editId' onchange='form.submit();'>";
+		$select = "<select id='input1' name='id' onchange='form.submit();'>";
 		$select .= "<option value='-1'>välj</option>";
 
-		foreach($array as $val) 
-		{
+		foreach($array as $val)  {
 		  $selected = '';
-		  if ( isset($this->id) && $this->id==$val['id'] ) 
-		  {
+		  if ( isset($this->id) && $this->id==$val['id'] ) {
 			$selected = "selected";
 		  }
 		  $select .= "<option value='{$val['id']}' {$selected}>" .$val['title'] . "</option>";
@@ -76,17 +80,18 @@ class View_Admin_Helper {
 		$select .= "</select>";
 
 		return $select;
-
 	}
 
-	private function SetupForm($action, $message = null, $headline = '', $dropdown = '', $fields = null, $res = null) {
-		$disabled = isset($res) ? '' : 'disabled';
+	private function setupForm($action, $headline = '', $fields = null, $dropdown = null, $message = null, $item = null) {
+
+		$disabled = isset($dropdown) ? '' : 'disabled';
 		$separator = ($this->type=='object') ? "<br>" : '';
 		$html = "<h2>{$headline}</h2>";
-		
+		//var_dump($res);
 		
 		// Dropdown menu
-		if (isset($res)) :
+		if (isset($dropdown)) :
+			$dropdown = $this->setupDropDown($dropdown);
 		$html .= <<< EOD
 <form method="post" action='/admin/edit/{$this->type}' class="editor">
 	  <fieldset>
@@ -109,10 +114,10 @@ EOD;
 	endif;
 
 	if (isset($message)) {
-		$html .= <<< EOD
-		<script>$("#message").text("{$message}").show().fadeOut(4000);</script>
-EOD;
+		$script = "\$('#message').text('{$message}').show().fadeOut(4000);";
+		$html .= $this->helper->jsDocumentReadyFunction("\$('#message').text('{$message}').show().fadeOut(4000);");
 	}
+
 
 	// The fields for adding or updating 
 	if (isset($fields)) :
@@ -121,15 +126,16 @@ EOD;
 	foreach ($fields as $val) {
 		$the_fields .= "<label for=".$val['name']."> ".$val['label'].": </label>";
 		if ($val['type']=="textarea") {
-			$the_fields .= "<textarea class='editor {$this->type}' name=".$val['name']." id=".$val['name'].">".$res[0][$val['name']]."</textarea><br>";
+			$the_fields .= "<textarea class='editor {$this->type}' name=".$val['name']." id=".$val['name'].">".$item[0][$val['name']]."</textarea><br>";
 		}
 		else {
-			$the_fields .= "<input class={$this->type} type=".$val['type']."  name=".$val['name']." id=".$val['name']." value='".$res[0][$val['name']]."'>{$separator}";
+			//$the_fields = Form::input(array('type' => $val['type'], 'name' => )
+			$the_fields .= "<input class={$this->type} type=".$val['type']."  name=".$val['name']." id=".$val['name']." value='".$item[0][$val['name']]."'>{$separator}";
 		}
 	}
-	  ///admin/{$this->action}/{$this->type}/{$this->id}
+
 	$html .= <<< EOD
-	<form method="post" action='bajs' class="editor" id=view>
+	<form method="post" action='' class="editor" id=view>
 	<fieldset>
 	  <div class="editor-lower-container">
 	  	<div class="editor-lower-menu">
