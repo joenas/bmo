@@ -2,8 +2,10 @@
 BMO: Projekt till htmlphp @ BTH Uni
 
 
+Todo: 
+* Ändra så Admin blir mer flexibel, automagiska anrop för Article/Object/etc
+* Basklass för (databas) Table?
+* Validering på formulär?
 
-Historik:
------------
+* Göra klart själva sidan...
 
-2012-04-20: Lägger upp material till projektet och startar repo
