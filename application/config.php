@@ -30,6 +30,9 @@ define( 'CONTROLLER_PREFIX', 	'Controller_' );
 define( 'VIEW_PREFIX',			'View_' );
 define( 'CLASS_EXT',		'.php' );
 
+// Models
+define( 'MODEL',		APP . 'models/');
+
 
 
 // Autoloader for classes
@@ -47,6 +50,10 @@ function autoloader($className) {
 	// Check in 'pages/Example/'
 	elseif (is_file( "{$classPath}/{$className}.php" )) {
 		require_once( "{$classPath}/{$className}.php" );
+	}
+	// Check in 'models/'
+	elseif (is_file( MODEL.$className.".php" )) {
+		require_once( MODEL.$className.".php" );
 	}
 	//else die("Error in ".__FILE__.": Class file for <code>".$className."</code> not found in " . $classPath);
 }

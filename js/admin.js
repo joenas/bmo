@@ -29,7 +29,7 @@ $("#view #delete").on('click', function(event) {
 
 });
 
-var shared = { position: { my: 'top left', at: 'bottom right' }, style: { classes: 'ui-tooltip-rounded' } }
+//var shared = { position: { my: 'top left', at: 'bottom right' }, style: { classes: 'ui-tooltip-rounded' } }
 
 
 

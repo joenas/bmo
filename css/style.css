@@ -176,6 +176,7 @@ form.login {
   margin:0 auto;
 }
 legend.login { color:#960400; }
+#dialog-confirm { font-size:1em; }
 div.debug {
   background:white;
   color:black;

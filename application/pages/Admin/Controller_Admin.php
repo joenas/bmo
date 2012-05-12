@@ -15,6 +15,8 @@ class Controller_Admin extends CoreController {
 		$this->login = new Login;
 		$this->authenticated = $this->login->userIsAuthenticated();
 
+		$this->db = Database::Instance();
+
 		// Basic variables for template
 		$this->data['pageId'] = "admin";
 		$this->data['title'] = "BMO Admin";
@@ -46,7 +48,8 @@ class Controller_Admin extends CoreController {
 			$this->index();
 		} else {
 			$this->requestParser();
-			$viewHelper = new View_Admin_Helper($this->type, $this->id);
+
+			$viewHelper = new View_Admin_Helper($this->model, $this->id);
 			$message = isset($this->message) ? $viewHelper->notice($this->message) : null;		
 			$this->data['view'] = $viewHelper->editView();
 		}
@@ -59,7 +62,7 @@ class Controller_Admin extends CoreController {
 			$this->index();
 		} else {
 			$this->requestParser();
-			$viewHelper = new View_Admin_Helper($this->type, null);
+			$viewHelper = new View_Admin_Helper($this->model, null);
 			$this->data['view'] = $viewHelper->addView();
 		}		
 	}
@@ -70,25 +73,26 @@ class Controller_Admin extends CoreController {
 		if ($this->authenticated===false || !isset($_POST['save'])) {
 			$this->index();
 		}	else if ( isset($_POST['save']) && $_POST['save']==true) {
+
 				$this->requestParser();
-				$db = Database::Instance();
 
-				switch ($this->type) {
+				// Create Model, for example 'Article'
+				$model = new $this->model($this->db);
 
-				case "article":
-					$article = new Article($db);
-					//$res = $article->updateArticle($_POST['id'], $_POST['title'],$_POST['category'],$_POST['author'],$_POST['pubdate'],$_POST['content']);
-					$article->updateArticle($_POST);
-					$this->message = "Artikeln har uppdaterats.";
-					break;
+				// Update
+				$model->update($_POST);
 
-				case "object":
-					$object = new Object($db);
-					$object->updateObject($_POST['id'], $_POST['title'],$_POST['category'],$_POST['image'],$_POST['owner'],$_POST['text']);
-					$this->message = "Objektet har uppdaterats.";
-					break;
+				switch ($this->model) {
+					case "Article":
+						$this->message = "Artikeln har uppdaterats.";
+						break;
+					case "Object":
+						$this->message = "Objektet har uppdaterats.";
+						break;
 				}
-				$this->reroute('edit', $this->type, $this->id);
+
+				// Reroute to edit View
+				$this->reroute('edit', $this->model, $this->id);
 		}
 	}
 
@@ -98,28 +102,26 @@ class Controller_Admin extends CoreController {
 		$this->requestParser();
 		
 		// Not logged in / id OR type isnt set
-		if ($this->authenticated===false || !(isset($this->type) && isset($this->id)) ) {
+		if ($this->authenticated===false || !(isset($this->model) && isset($this->id)) ) {
 			$this->index();
 		}
 		// Both id and type are set	
 		else  {
-				$db = Database::Instance();
 
-			  switch ($this->type) {
+				$model = new $this->model($this->db);
+				$model->deleteById($this->id);
 
-				case "article";
-					$article = new Article($db);
-					$article->deleteArticle($this->id);
+			  switch ($this->model) {
+
+				case "Article";
 					$this->message = "Artikeln har tagits bort.";
 					break;
-				case "object": 
-					$object = new Object($db);
-					$object->deleteObject($this->id);
+				case "Object": 
 					$this->message = "Objektet har tagits bort.";
 					break;
 			}
 			unset($_POST['id']);
-			$this->reroute('edit', $this->type);
+			$this->reroute('edit', $this->model);
 		}
 	}
 
@@ -131,21 +133,20 @@ class Controller_Admin extends CoreController {
 		else if (isset($_POST['save']) && $_POST['save']==true) { 
 
 			$this->requestParser();
-			$db = Database::Instance();
-			switch ($this->type) {
+			switch ($this->model) {
 			
-			case "article":
-				$article = new Article($db);
-				$res = $article->createArticle( $_POST );
+			case "Article":
+				$article = new Article($this->db);
+				$res = $article->create( $_POST );
 				// Insert successful
 				if ($res!=='0') {
 					$this->message = "Artikeln har lagts till.";
 				}
 				break;
 
-			case "object":
-				$object = new Object($db);
-				$res = $object->createObject( $_POST['title'], $_POST['category'], 
+			case "Object":
+				$object = new Object($this->db);
+				$res = $object->create( $_POST['title'], $_POST['category'], 
 												$_POST['image'], $_POST['owner'], $_POST['text'] );
 				// Insert successful
 				if ($res!=='0') {
@@ -153,7 +154,7 @@ class Controller_Admin extends CoreController {
 				}
 				break;
 			}
-			$this->reroute('edit', $this->type, $res);
+			$this->reroute('edit', $this->model, $res);
 		}
 	}
 
@@ -182,9 +183,10 @@ class Controller_Admin extends CoreController {
 	// Gets the need id and object type for editing etc
 	private function requestParser() {
 		// Arguments from request, ie 'article' or 'object'
-		$this->type = 	!isset($this->type) 
+		$this->model = 	!isset($this->model) 
 											? isset($this->request->arguments[2]) ? $this->request->arguments[2] : null 
-										: $this->type;
+										: $this->model;
+		$this->model = ucfirst($this->model);
 
 		// Check for id in $_POST first, then in request URL 		
 		$this->id = !isset($this->id) 
@@ -195,8 +197,8 @@ class Controller_Admin extends CoreController {
 	}
 
 	// Reroute internally after successful update etc
-	private function reroute($route, $type = null, $id = null) {
-		$this->type = $type;
+	private function reroute($route, $model = null, $id = null) {
+		$this->model = $model;
 		$this->id = $id;
 		$this->$route();
 	}
