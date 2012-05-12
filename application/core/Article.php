@@ -5,10 +5,10 @@ class Article {
 	static private $table = 'Article';
 	private $db;
 	public $fields = array( 					
-							'title' 	=> array('name' => 'title', 'label' => 'Titel', 'type' =>'text', 'tags' => ''),
-							'category' 	=> array('name' => 'category', 'label' => '<br>Kategori', 'type' => 'text', 'tags' => ''),							
-							'author'	=> array('name' => 'author', 'label' => 'Författare','type' =>'text', 'tags' => ''),
-							'pubdate'	=> array('name' => 'pubdate', 'label' => 'Datum','type' =>'text', 'tags' => ''),
+							'title' 	=> array('name' => 'title', 'label' => 'Titel', 'type' =>'text', 'tags' => 'inga'),
+							'category' 	=> array('name' => 'category', 'label' => '<br>Kategori', 'type' => 'text', 'tags' => 'inga'),
+							'author'	=> array('name' => 'author', 'label' => 'Författare','type' =>'text', 'tags' => 'inga'),
+							'pubdate'	=> array('name' => 'pubdate', 'label' => 'Datum','type' =>'text', 'tags' => 'inga'),
 							'content'	=> array('name' => 'content', 'label' => '', 'type' =>'textarea', 'tags' => '<img><p><b><i><blockquote>')
 					);
 
@@ -77,8 +77,6 @@ class Article {
 		$query = "UPDATE ".self::$table." SET title=?, category=?, author=?, pubdate=?, content=?, permalink=? WHERE id='{$id}'";
 		$params = array($title, $category, $author, $pubdate, $content, $permalink);
 		$this->db->ExecuteQuery($query, $params);
-	    
-		return $this->db->LastInsertId();
 	}
 
   	// Delete an article.

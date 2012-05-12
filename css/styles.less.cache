@@ -1,0 +1,199 @@
+a:4:{s:4:"root";s:11:"styles.less";s:8:"compiled";s:3979:"@import url("forms.css");
+@import url("source.css");
+.bilbo { font-family:'Bilbo Swash Caps', cursive; }
+.nothing { font-family:'Nothing You Could Do', cursive; }
+.karla { font-family:'Karla', sans-serif; }
+header, footer, nav, article, section, aside, figure, figcaption { display:block; }
+html, body {
+  height:100%;
+  font-size:1em;
+  padding:0px;
+  margin:0px;
+  background-color:#ffffff;
+  color:black;
+}
+header.above, header.top, div.mainwrapper { margin:0 auto; }
+body {
+  font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family:'Trocchi', serif;
+  font-size:0.9em;
+}
+a {
+  color:#960400;
+  text-decoration:none;
+}
+a:hover { text-decoration:underline; }
+p {
+  word-wrap:break-word;
+  font-size:1.1em;
+  font-family:'Karla', sans-serif;
+}
+h1 {
+  font-size:1.5em;
+  color:#960400;
+  margin-top:0.5em;
+}
+.left { float:left; }
+.right { float:right; }
+header.top {
+  text-align:center;
+  width:100%;
+  background-color:#a40026;
+}
+nav.menu { padding:1em 0; }
+nav.menu a {
+  font-family:'Karla', sans-serif;
+  text-transform:uppercase;
+  color:#321000;
+  padding:0 0.5em;
+  font-size:1.5em;
+}
+nav.menu a:hover {
+  color:#dddddd;
+  text-decoration:none;
+}
+body#home a#home-, body#articles a#articles-, body#objects a#objects-, body#gallery a#gallery-, body#about a#about- {
+  color:#dddddd;
+  font-weight:700;
+}
+header.logo {
+  font-family:'Nothing You Could Do', cursive;
+  text-align:center;
+  margin:2em 0;
+}
+header.logo h5 {
+  font-weight:normal;
+  font-size:3.5em;
+  margin:0;
+}
+div.stickfootwrap {
+  min-height:100%;
+  overflow:auto;
+}
+div.mainwrapper {
+  width:90%;
+  padding-bottom:90px;
+  min-height:35em;
+  overflow:auto;
+}
+div.randimage {
+  float:left;
+  margin-right:2em;
+  margin-top:3em;
+  width:220px;
+  overflow:auto;
+  border:1px solid black;
+  -webkit-border-radius:10px;
+  -moz-border-radius:10px;
+  border-radius:10px;
+}
+div.primary {
+  float:left;
+  width:85%;
+}
+div.primary h1 {
+  margin-top:0px;
+  font-size:1.2em;
+}
+div.secondary {
+  float:right;
+  width:15%;
+}
+div.secondary ul { padding:0.5em; }
+div.secondary h2 { font-family:'Nothing You Could Do', cursive; }
+div.footer {
+  position:relative;
+  margin-top:-90px;
+  height:90px;
+  background-color:#8a0020;
+  border-top:1px solid black;
+  clear:both;
+  text-align:center;
+}
+footer.bottom a {
+  margin:0 0.5em;
+  color:#321000;
+}
+footer.bottom a:hover { color:white; }
+footer.bottom p { margin:0px; }
+div.leftfoot {
+  height:30px;
+  width:50%;
+  float:left;
+  margin:30px 0;
+}
+div.rightfoot {
+  height:30px;
+  width:50%;
+  float:right;
+  margin:20px 0;
+  font-size:0.7em;
+}
+article {
+  width:70%;
+  float:left;
+  overflow:auto;
+}
+article.admin {
+  width:80%;
+  float:right;
+  margin-right:3em;
+  overflow:auto;
+}
+article.admin input#title { width:250px; }
+article.admin input#image { width:250px; }
+article.admin input#text { width:400px; }
+article.admin textarea { width:600px; }
+article.admin div.editor-display-container { min-height:400px; }
+article.admin div.editor-message {
+  display:none;
+  width:200px;
+  float:left;
+  margin-left:2em;
+  margin-bottom:0;
+  padding:3px;
+}
+article.admin div.editor-dropdown { float:left; }
+article.articles .date { font-size:0.7em; }
+article.articles .articlefooter {
+  float:right;
+  margin:1em 0.5em;
+  font-style:italic;
+  overflow:auto;
+}
+article.articles div.content { min-height:100px; }
+article.articles div.spacer {
+  border-top:1px #960400 solid;
+  margin:2em auto;
+  width:80%;
+}
+article.home blockquote {
+  font-style:italic;
+  color:#4d4d4d;
+}
+form.login {
+  width:450px;
+  margin:0 auto;
+}
+legend.login { color:#960400; }
+div.debug {
+  background:white;
+  color:black;
+  width:100%;
+  font-size:0.5em;
+  padding:0.2em;
+}
+div.debug:hover { font-size:1em; }
+textarea.editor {
+  height:300px;
+  font-size:1em;
+}
+@media screen and (max-width: 1190px) {
+}
+@media screen and (max-width: 1024px) and (min-width: 768px) {
+}
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+}
+@media only screen and (max-width: 479px) {
+}
+";s:5:"files";a:1:{s:61:"/home/jon/wwwroot/enabled_hosts/jonnev.se/bmo/css/styles.less";i:1336776766;}s:7:"updated";i:1336776768;}

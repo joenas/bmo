@@ -51,12 +51,6 @@
 	border-radius: @radius;
 }
 
-.transition {
-	 -webkit-transition: all 0.2s ease;
-	-moz-transition:    all 0.2s ease;
-	-o-transition:      all 0.2s ease;
-}
-
  /* html5 elements */
 /*----------------*/
 
@@ -118,25 +112,16 @@ h1 {
 header.top {
 	text-align: center;
 	width: 100%;
-	background-color: lighten(@primbackground, 5%);	font-size: 1em;
-	&:hover {
-		font-size: 1em;
-	}
+	background-color: lighten(@primbackground, 5%);	
 }	
 		
-		
 nav.menu {
-	width: 100%;
-	margin: 0 auto;
 	padding: 1em 0;
-	.transition;
 	a {
 		.karla;
 		text-transform: uppercase;
-		text-align: center;
 		color: @menulinkcolor;
 		padding:0 0.5em;
-		text-decoration: none;
 		font-size: 1.5em;
 		&:hover {
 			color: @menuhovercolor;
@@ -161,12 +146,11 @@ body#about a#about-
 header.logo {
 	.nothing;
 	text-align: center; 
-	margin-top: 2em;
-	margin-bottom: 2em;
+	margin: 2em 0;
 	h5 {
 		font-weight: normal;
 		font-size: 3.5em;
-		margin: 0px;
+		margin: 0;
 	}
 }
 
@@ -181,10 +165,8 @@ div.stickfootwrap {
 
 div.mainwrapper {
 	width: @pagewidth;
-	background-color: @secbackground;
 	padding-bottom: @footerheight;
 	min-height: 35em;
-//	background-color: blue;
 	overflow: auto;
 }
 
@@ -213,12 +195,6 @@ div.secondary {
 	ul {
 		padding: 0.5em;
 	}
-	a {
-		text-decoration: none;
-		&:hover {
-			text-decoration: underline;
-		}
-	}
 	h2 { 
 		.nothing; 
 	}
@@ -235,15 +211,12 @@ div.footer {
 	background-color: @footerbackground;	
 	border-top: 1px solid black;
 	clear: both;
+	text-align: center;
 }
 
 // actual content container
 footer.bottom {
-	//width: @footerwidth;
-	text-align: center;
-
 	a {
-		text-decoration: none;
 		margin: 0 0.5em;
 		color: @footerlinkcolor;
 		&:hover {
@@ -289,14 +262,13 @@ article {
 			&#title { width: 250px; }
 			&#image { width: 250px; }
 			&#text { width: 400px; }
-	//		&#text.object { width: 400px; height: 2.5em; overflow: auto; }
 		}
 		textarea {
 			width: 600px;
 		}
 		div.editor-display-container { min-height: 400px; }
-		div.editor-show { width: auto; }
-		div.editor-message { display: none; width: 200px;  }
+		div.editor-message { display: none; width: 200px;  .left; margin-left: 2em; margin-bottom: 0; padding: 3px; }
+		div.editor-dropdown { .left }
 	}
 	&.about {
 	}
@@ -366,6 +338,7 @@ textarea.editor {
 	height: 300px;
 	font-size: 1em;
 }
+
 
  /*	media queries (development)	*/
 /*_____________________________*/

@@ -19,7 +19,7 @@ class Core {
 		{
 			// ie 404, no page found
 			$this->controller = new CoreController();
-			$this->controllerAddons();
+			$this->controllerAddons($request);
 			$this->controller->index();	
 
 		} else {

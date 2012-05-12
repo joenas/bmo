@@ -6,17 +6,17 @@
 	<link <?php $this->helper->Link(IMG.'favicon.ico');?> rel="shortcut icon">
 
 	<!-- links to external stylesheets -->
-<?php if(isset($_SESSION['stylesheet'])): ?>
-	<link rel="stylesheet" <?php $this->helper->Link(CSS.$_SESSION['stylesheet']);?> type='text/css'>
-<?php else: ?>
-	<link rel="stylesheet" <?php $this->helper->Link(CSS.'style.css');?> title="standard stylesheet" type='text/css'>
-<?php endif; ?>
-	<link rel="stylesheet/less" type="text/css" <?php $this->helper->Link(CSS.'styles.less');?> >
+	<link rel="stylesheet" <?php $this->helper->Link(CSS.'ui-lightness/jquery-ui-1.8.20.custom.css');?> title="standard stylesheet" type='text/css'>
+	<link rel="stylesheet" <?php $this->helper->Link(CSS.'qtip.css');?> title="standard stylesheet" type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Bilbo+Swash+Caps|Trocchi|Karla|Nothing+You+Could+Do' rel='stylesheet' type='text/css'>
-
-	<script <?php $this->helper->Link('js/less.js', 'src');?> type="text/javascript"></script>
-	<script <?php $this->helper->Link('js/jquery-1.7.1.js', 'src');?> type="text/javascript"></script>
+  <link rel='stylesheet' <?php $this->helper->Link(CSS.'style.php');?> type='text/css' media='all'>
 	
+
+
+<!--
+	<link rel="stylesheet/less" type="text/css" <?php $this->helper->Link(CSS.'styles.less');?> >
+	<script <?php $this->helper->Link('js/less.js', 'src');?> type="text/javascript"></script>
+-->
 
 	<!-- $pageStyle for additional style -->
 	<?php if(isset($pageStyle)) : ?>
@@ -96,6 +96,12 @@ require( $this->view );
 
 	</footer>
 </div>
+
+<script <?php $this->helper->Link('js/jquery-1.7.2.min.js', 'src');?> type="text/javascript"></script>
+<script <?php $this->helper->Link('js/jquery.qtip.js', 'src');?> type="text/javascript"></script>	
+<script <?php $this->helper->Link('js/jquery-ui-1.8.20.custom.min.js', 'src');?> type="text/javascript"></script>
+<script <?php $this->helper->Link('js/admin.js', 'src');?> type="text/javascript"></script>
+<?php echo $this->helper->getJsFunctions(); ?>
 
 </body>
 </html>

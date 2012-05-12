@@ -19,7 +19,9 @@ class Controller_Admin extends CoreController {
 		$this->data['pageId'] = "admin";
 		$this->data['title'] = "BMO Admin";
 		if (!isset($this->data['pageStyle'])) { $this->data['pageStyle'] = "header.logo { display: none; }"; }
+		
 	}
+
 
 	// Default View
 	public function index() {
@@ -36,6 +38,7 @@ class Controller_Admin extends CoreController {
 		$this->data['pageStyle'] = '';
 	}
 
+
 	// Editor view, requires that user is logged in
 	public function edit() {
 
@@ -43,11 +46,10 @@ class Controller_Admin extends CoreController {
 			$this->index();
 		} else {
 			$this->requestParser();
-			$message = isset($this->message) ? $this->message : null;		
-			$viewHelper = new View_Admin_Helper('update', $this->type, $this->id, $this->baseUrl);
-			$this->data['view'] = $viewHelper->editView($message);
+			$viewHelper = new View_Admin_Helper($this->type, $this->id);
+			$message = isset($this->message) ? $viewHelper->notice($this->message) : null;		
+			$this->data['view'] = $viewHelper->editView();
 		}
-
 	}	
 
 	// View for adding article or object
@@ -57,7 +59,7 @@ class Controller_Admin extends CoreController {
 			$this->index();
 		} else {
 			$this->requestParser();
-			$viewHelper = new View_Admin_Helper('add', $this->type, null, $this->baseUrl);
+			$viewHelper = new View_Admin_Helper($this->type, null);
 			$this->data['view'] = $viewHelper->addView();
 		}		
 	}
@@ -76,34 +78,35 @@ class Controller_Admin extends CoreController {
 				case "article":
 					$article = new Article($db);
 					//$res = $article->updateArticle($_POST['id'], $_POST['title'],$_POST['category'],$_POST['author'],$_POST['pubdate'],$_POST['content']);
-					$res = $article->updateArticle($_POST);
+					$article->updateArticle($_POST);
 					$this->message = "Artikeln har uppdaterats.";
-					$this->type = 'article';
 					break;
 
 				case "object":
 					$object = new Object($db);
-					$res = $object->updateObject($_POST['id'], $_POST['title'],$_POST['category'],$_POST['image'],$_POST['owner'],$_POST['text']);
+					$object->updateObject($_POST['id'], $_POST['title'],$_POST['category'],$_POST['image'],$_POST['owner'],$_POST['text']);
 					$this->message = "Objektet har uppdaterats.";
-					$this->type = 'object';
 					break;
 				}
-				$this->id = $_POST['id'];
-				$this->edit();
+				$this->reroute('edit', $this->type, $this->id);
 		}
 	}
 
 	// Deletes from database and redirects to edit View
 	public function delete() {
-		if ($this->authenticated===false) {
+		
+		$this->requestParser();
+		
+		// Not logged in / id OR type isnt set
+		if ($this->authenticated===false || !(isset($this->type) && isset($this->id)) ) {
 			$this->index();
-		}	
-		else if ( isset($_POST['delete']) && $_POST['delete']==true) {
+		}
+		// Both id and type are set	
+		else  {
+				$db = Database::Instance();
 
-			$this->requestParser();
-			$db = Database::Instance();
+			  switch ($this->type) {
 
-			switch ($_POST['type']) {
 				case "article";
 					$article = new Article($db);
 					$article->deleteArticle($this->id);
@@ -115,10 +118,8 @@ class Controller_Admin extends CoreController {
 					$this->message = "Objektet har tagits bort.";
 					break;
 			}
-
-			unset($this->id, $_POST['id']);
-			$this->type = $_POST['type'];
-			$this->edit();
+			unset($_POST['id']);
+			$this->reroute('edit', $this->type);
 		}
 	}
 
@@ -139,8 +140,6 @@ class Controller_Admin extends CoreController {
 				// Insert successful
 				if ($res!=='0') {
 					$this->message = "Artikeln har lagts till.";
-					$this->type = 'article';
-					$this->id = $res;		
 				}
 				break;
 
@@ -151,13 +150,10 @@ class Controller_Admin extends CoreController {
 				// Insert successful
 				if ($res!=='0') {
 					$this->message = "Objektet har lagts till.";
-					$this->type = "object";
-					$this->id = $res;
 				}
 				break;
 			}
-
-			$this->edit();
+			$this->reroute('edit', $this->type, $res);
 		}
 	}
 
@@ -186,14 +182,23 @@ class Controller_Admin extends CoreController {
 	// Gets the need id and object type for editing etc
 	private function requestParser() {
 		// Arguments from request, ie 'article' or 'object'
-		$this->type = !isset($this->type) ? isset($this->request->arguments[2]) ? $this->request->arguments[2] : null : $this->type;
+		$this->type = 	!isset($this->type) 
+											? isset($this->request->arguments[2]) ? $this->request->arguments[2] : null 
+										: $this->type;
+
 		// Check for id in $_POST first, then in request URL 		
-		$this->id = !isset($this->id) ? !isset($_POST['id']) ?  isset($this->request->arguments[3]) ? $this->request->arguments[3] : null : $_POST['id'] : $this->id;
+		$this->id = !isset($this->id) 
+									? !isset($_POST['id']) 
+										?  isset($this->request->arguments[3]) ? $this->request->arguments[3] : null 
+									: strip_tags($_POST['id']) 
+								: $this->id;
 	}
 
 	// Reroute internally after successful update etc
-	private function reroute($callback, $type = null, $id = null) {
-
+	private function reroute($route, $type = null, $id = null) {
+		$this->type = $type;
+		$this->id = $id;
+		$this->$route();
 	}
 
 }

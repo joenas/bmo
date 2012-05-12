@@ -4,6 +4,7 @@ class ViewHelper {
 
 	private static $instance;
 	private $baseUrl;
+	private $javascript = array();
 
 	public static function Instance() {
 		if(self::$instance == null) {
@@ -62,7 +63,20 @@ class ViewHelper {
 	}
 
 	public function jsDocumentReadyFunction ($function) {
-		return "<script>\$(document).ready(function(){ {$function} });</script>";
+		$this->javascript[] = "{$function}\n";
 	}	
+
+	public function getJsFunctions() {
+		//var_dump(empty($this->javascript));
+		if (!empty($this->javascript)) {
+			$html = "<script>\$(document).ready(function(){ ";
+			foreach ($this->javascript as $val ) {
+				$html .= $val;
+			}
+			$html .= " });</script>";
+			return $html;
+		}
+		else return false;
+	}
 
 }

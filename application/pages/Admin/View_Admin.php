@@ -39,4 +39,4 @@
   </ul>
 <?php endif; ?>
   </div>
-  <script <?php $this->helper->Link('js/admin.js', 'src');?> type="text/javascript">Den här sidan kräver javascript</script>
+  
