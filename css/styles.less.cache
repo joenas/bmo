@@ -1,4 +1,4 @@
-a:4:{s:4:"root";s:11:"styles.less";s:8:"compiled";s:4014:"@import url("forms.css");
+a:4:{s:4:"root";s:11:"styles.less";s:8:"compiled";s:4576:"@import url("forms.css");
 @import url("source.css");
 .bilbo { font-family:'Bilbo Swash Caps', cursive; }
 .nothing { font-family:'Nothing You Could Do', cursive; }
@@ -69,9 +69,10 @@ header.logo h5 {
 div.stickfootwrap {
   min-height:100%;
   overflow:auto;
+  background:url('/img/design/border-left-new.jpg') repeat-y left top;
 }
 div.mainwrapper {
-  width:90%;
+  width:95%;
   padding-bottom:90px;
   min-height:35em;
   overflow:auto;
@@ -89,7 +90,7 @@ div.randimage {
 }
 div.primary {
   float:left;
-  width:85%;
+  width:55%;
 }
 div.primary h1 {
   margin-top:0px;
@@ -97,10 +98,14 @@ div.primary h1 {
 }
 div.secondary {
   float:right;
-  width:15%;
+  width:25%;
 }
 div.secondary ul { padding:0.5em; }
 div.secondary h2 { font-family:'Nothing You Could Do', cursive; }
+div.tertiary {
+  float:left;
+  width:20%;
+}
 div.footer {
   position:relative;
   margin-top:-90px;
@@ -130,9 +135,10 @@ div.rightfoot {
   font-size:0.7em;
 }
 article {
-  width:70%;
-  float:left;
+  width:95%;
+  float:right;
   overflow:auto;
+  margin:0 auto;
 }
 article.admin {
   width:80%;
@@ -174,9 +180,13 @@ article.home blockquote {
 form.login {
   width:450px;
   margin:0 auto;
+  margin-top:6em;
 }
 legend.login { color:#960400; }
-#dialog-confirm { font-size:1em; }
+#dialog-confirm {
+  font-size:1em;
+  display:none;
+}
 div.debug {
   background:white;
   color:black;
@@ -189,6 +199,29 @@ textarea.editor {
   height:300px;
   font-size:1em;
 }
+figure.articles {
+  display:inline;
+  margin:0px;
+  width:50%;
+}
+img.articles {
+  -webkit-border-radius:5px;
+  -moz-border-radius:5px;
+  border-radius:5px;
+  border:1px solid black;
+}
+figcaption, figcaption.articles {
+  font-size:0.8em;
+  font-style:normal;
+  width:250px;
+}
+div.articles-image {
+  clear:both;
+  overflow:auto;
+  min-width:100px;
+  max-width:600px;
+  margin:0 auto 2em auto;
+}
 @media screen and (max-width: 1190px) {
 }
 @media screen and (max-width: 1024px) and (min-width: 768px) {
@@ -197,4 +230,4 @@ textarea.editor {
 }
 @media only screen and (max-width: 479px) {
 }
-";s:5:"files";a:1:{s:61:"/home/jon/wwwroot/enabled_hosts/jonnev.se/bmo/css/styles.less";i:1336834401;}s:7:"updated";i:1336834404;}
+";s:5:"files";a:1:{s:61:"/home/jon/wwwroot/enabled_hosts/jonnev.se/bmo/css/styles.less";i:1336939832;}s:7:"updated";i:1336939834;}

@@ -87,7 +87,6 @@ class Login {
     <form method="post" action="{$baseUrl}admin/login" class="login">
     <fieldset>
       <legend class="login">Admin</legend>
-      $output
       <p>
         <label for="input1">Användarkonto:</label><br>
         <input id="input1" class="text" type="text" name="account">
@@ -98,10 +97,12 @@ class Login {
       </p>
       <p>
         <input type="submit" name="doLogin" value="Login" $disabled>
+        $output
         $disabledInfo
       </p>
     </fieldset>
   </form>
+  
 EOD;
 
     return $html;

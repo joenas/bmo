@@ -19,18 +19,26 @@ class Object extends CoreModel {
 	}
 	
 	// Create a new Object.
-  	//-----------------------
-  	public function create( $title, $category, $image, $owner, $text ) {
+  //-----------------------
+  public function create( array $array ) {
 
-	    $query = "INSERT INTO ".$this->table." (title, category, image, owner, text) VALUES(?, ?, ?, ?, ?)";
-	    $params = array($title, $category, $image, $owner, $text);
-    	$this->db->ExecuteQuery($query, $params);
-    	return $this->db->LastInsertId();
-  	}
+ 		// Remove unwanted tags
+  	$this->clean($array);
+  	extract($array);
+
+    $query = "INSERT INTO ".$this->table." (title, category, image, owner, text) VALUES(?, ?, ?, ?, ?)";
+    $params = array($title, $category, $image, $owner, $text);
+    $this->db->ExecuteQuery($query, $params);
+   	return $this->db->LastInsertId();
+  }
 
 	// Update an Object.
 	//---------------------
-	public function update($id, $title, $category, $image, $owner, $text) {
+	public function update( array $array ) {
+
+		// Remove unwanted tags
+  	$this->clean($array);
+  	extract($array);
 
 		$query = "UPDATE ".$this->table." SET title=?, category=?, image=?, owner=?, text=? WHERE id='{$id}'";
 		$params = array($title, $category, $image, $owner, $text);

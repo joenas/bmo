@@ -1,9 +1,12 @@
 
+  <div class="tertiary">
+    &nbsp;
+  </div>
 
   <!-- primary content -->
   <div class="primary">
   
-  <?php echo $this->helper->RandomImage(); ?>
+  
 
 	<article class="home">
 	<h1><?php echo $view_title; ?></h1>
@@ -13,5 +16,5 @@
 
   <!-- secondary content -->
   <div class="secondary">
-	<p>Här kan man ha länkar.</p>
+	
   </div>

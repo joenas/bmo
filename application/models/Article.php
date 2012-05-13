@@ -18,6 +18,12 @@ class Article extends CoreModel {
 	 	parent::__construct($database);
 	 }
 
+	 public function getByLink($link) {
+		$query = 'SELECT * FROM ' . $this->table . " where permalink=?";
+		$params[] = $link;
+		return $this->db->ExecuteSelectQueryAndFetchAll($query, $params);
+	}
+
 	// Create a new article.
   	//-----------------------
   	public function create( array $array ) {

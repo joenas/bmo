@@ -1,8 +1,9 @@
-
+  <div class="tertiary">
+    &nbsp;
+  </div>
 
   <!-- primary content -->
   <div class="primary">
-    <?php echo $this->helper->RandomImage(); ?>
   <article class='about'>
   <h1><?php echo $view_title; ?></h1>
   <?php echo $view_content; ?>

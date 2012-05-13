@@ -10,21 +10,9 @@
 	<link rel="stylesheet" <?php $this->helper->Link(CSS.'qtip.css');?> title="standard stylesheet" type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Bilbo+Swash+Caps|Trocchi|Karla|Nothing+You+Could+Do' rel='stylesheet' type='text/css'>
   <link rel='stylesheet' <?php $this->helper->Link(CSS.'style.php');?> type='text/css' media='all'>
-	
-
-
-<!--
-	<link rel="stylesheet/less" type="text/css" <?php $this->helper->Link(CSS.'styles.less');?> >
-	<script <?php $this->helper->Link('js/less.js', 'src');?> type="text/javascript"></script>
--->
 
 	<!-- $pageStyle for additional style -->
-	<?php if(isset($pageStyle)) : ?>
-	<style type="text/css">
-	<?php echo $pageStyle; ?>
-	</style>
-	<?php endif; ?>
-	
+<?php echo (isset($pageStyle)) ? "<style type='text/css'>{$pageStyle}</style>" : ""; ?>	
 
 	<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 	<!--[if !IE 7]>
@@ -34,11 +22,10 @@
 <![endif]-->
 </head>
 
-<body<?php if (isset($pageId)) echo " id='$pageId' "; ?>>
+<body <?php echo (isset($pageId)) ? "id='{$pageId}'" : ""; ?>>
 
 <?php 
-$debug = Debug::Instance();
-echo $debug->output();
+echo Debug::Instance()->output();
 ?>
 
 <!-- stickyfoot wrapper -->
@@ -101,6 +88,7 @@ require( $this->view );
 <script <?php $this->helper->Link('js/jquery.qtip.js', 'src');?> type="text/javascript"></script>	
 <script <?php $this->helper->Link('js/jquery-ui-1.8.20.custom.min.js', 'src');?> type="text/javascript"></script>
 <script <?php $this->helper->Link('js/admin.js', 'src');?> type="text/javascript"></script>
+
 <?php echo $this->helper->getJsFunctions(); ?>
 
 </body>

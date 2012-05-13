@@ -3,12 +3,11 @@ BMO: Projekt till htmlphp @ BTH Uni
 
 
 Todo: 
-* Uppdatera Object så den tar en array
 * Validering på formulär?
 * Göra klart själva sidan...
 
 Klart:
-
+X Uppdatera Object så den tar en array
 X Ändra så Admin blir mer flexibel, automagiska anrop för Article/Object/etc
 X Basklass för (databas) Table?
 

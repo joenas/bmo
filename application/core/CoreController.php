@@ -26,7 +26,7 @@ class CoreController {
 
 		// Content file, 'View_Example.php' etc. Required in template.php
 		$this->view = $path.VIEW_PREFIX.$view.'.php';
-
+		
 		// Get the data from controller
 		if (method_exists($this, 'getData')) {
 			extract($this->getData());

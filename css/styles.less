@@ -30,9 +30,10 @@
 @footerlinkcolor: #321000;
 @footerhovercolor: white;
 
-@pagewidth: 90%;
-@divprimwidth: 85%;
-@divsecwidth: 15%;
+@pagewidth: 95%;
+@divprimwidth: 55%;
+@divsecwidth: 25%;
+@divterwidth: 20%;
 @divimagewidth: 220px;
 
 @footerwidth: 100%;
@@ -116,6 +117,7 @@ header.top {
 }	
 		
 nav.menu {
+
 	padding: 1em 0;
 	a {
 		.karla;
@@ -161,6 +163,8 @@ div.stickfootwrap {
 	min-height: 100%;
 //	background-color: yellow;
 	overflow: auto;
+	background: url('/img/design/border-left-new.jpg') repeat-y left top;
+	//background: url('/images/bg02.jpg') repeat-x left top;
 }
 
 div.mainwrapper {
@@ -183,6 +187,7 @@ div.randimage {
 div.primary {
 	.left;
 	width: @divprimwidth;
+	//border: 1px solid blue;	
 	h1 {
 		margin-top: 0px;
 		font-size: 1.2em;
@@ -192,12 +197,19 @@ div.primary {
 div.secondary {
 	.right;
 	width: @divsecwidth;
+	//border: 1px solid red;
 	ul {
 		padding: 0.5em;
 	}
 	h2 { 
 		.nothing; 
 	}
+}
+
+div.tertiary {
+	.left;
+	width: @divterwidth;
+	//border: 1px solid green;
 }
 
 
@@ -250,9 +262,10 @@ div.rightfoot {
 
 
 article {
-		width: 70%;
-		.left;
+		width: 95%;
+		.right;
 		overflow: auto;
+		margin: 0 auto;
 	&.admin {
 		width: 80%;
 		.right;
@@ -266,6 +279,7 @@ article {
 		textarea {
 			width: 600px;
 		}
+		//form.login { margin-top: 2em; }
 		div.editor-display-container { min-height: 400px; }
 		div.editor-message { display: none; width: 200px;  .left; margin-left: 2em; margin-bottom: 0; padding: 3px; }
 		div.editor-dropdown { .left }
@@ -309,6 +323,7 @@ article {
 form.login {
 	width: 450px;
 	margin: 0 auto;
+	margin-top: 6em;
 }
 
 legend.login {
@@ -324,6 +339,7 @@ legend.login {
 
 #dialog-confirm {
 	font-size: 1em;
+	display: none;
 }
 
 div.debug {
@@ -343,6 +359,34 @@ textarea.editor {
 	font-size: 1em;
 }
 
+figure.articles { 
+	display: inline; 
+	margin: 0px; 
+	width: 50%;
+
+}
+
+img.articles {
+	.border-radius(5px);
+	border: 1px solid black;
+
+}
+figcaption, figcaption.articles {
+	font-size: 0.8em;
+	font-style: normal;
+	width: 250px;
+	//border: 1px solid green; 
+
+}
+
+div.articles-image { 
+	//border: 1px solid green; 
+	clear: both; 
+	overflow: auto;
+	min-width: 100px; 
+	max-width: 600px; 
+	margin: 0 auto 2em auto;
+}
 
  /*	media queries (development)	*/
 /*_____________________________*/

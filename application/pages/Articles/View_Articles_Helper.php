@@ -10,7 +10,7 @@ class View_Articles_Helper {
 
 	// Create html for showing an article
 	public function articleView($link) {
-			$array = $this->articles->getArticle($link, 'permalink');
+			$array = $this->articles->getByLink($link);
 
 			if (!empty($array)) {
 				$html = "<h2>".$array[0]['title']."</h2><div class='content'>";
@@ -24,7 +24,7 @@ class View_Articles_Helper {
 
 	// Create a nice list of articles
 	public function articleList() {
-		$array = $this->articles->getAllArticlesByCategory('article');
+		$array = $this->articles->getAllByIndex('category', 'article');
 
 		$html = "";
 		foreach ($array as $val) {
@@ -39,7 +39,7 @@ class View_Articles_Helper {
 
 	// Create html for the sidebar with links
 	public function articleSidebar() {
-		$array = $this->articles->getAllArticlesByCategory('article');
+		$array = $this->articles->getAllByIndex('category', 'article');
 
 		$html = "<h2>Artiklar</h2><ul>";
 		foreach ($array as $val) {
@@ -47,6 +47,28 @@ class View_Articles_Helper {
 		}
 		$html .= "</ul>";
 		return $html;
+	}
+
+	public function articleImages($link) {
+
+		$article = $this->articles->getByLink($link);
+		$objects = new Object($this->db);
+		$array = $objects->getAllByIndex('category', $article[0]['imagecategory']);
+		
+		$html = "<div class=article-image-container style='clear: both;'>Relaterade bilder!";
+		$i = 0;
+		foreach ($array as $val) {
+			$divmain = ($i%2 == 0) ? "</div><div class='articles-image'>" : '';
+			$float = ($i%2 == 0) ? "left" : "right";
+			$i++;
+			$html .= $divmain."\n\t<figure class='articles {$float}'><img class='articles' src='{$this->baseUrl}".str_replace('/bmo/', '/bmo/250/', $val['image'])."' alt='".$val['title']."'";
+			//$html .= "\n\t<figcaption class='articles'>".$val['text']."</figcaption></figure>";
+			$html .= "title='".$val['text']."'>\n\t<figcaption class='articles'>".$val['text']."</figcaption></figure>";
+		}
+		$html .= "</div>";
+	
+		return $html;
+
 	}
 }
 

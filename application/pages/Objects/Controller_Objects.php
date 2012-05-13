@@ -20,7 +20,7 @@ class Controller_Objects extends CoreController {
 
 		$object = new Object($db);
 
-		$res = $object->getObject('7');
+		$res = $object->getById('7');
 		$this->data['id'] = $res[0]['id'];
 		$this->data['view_title'] = $res[0]['title'];
 		$this->data['view_category'] = $res[0]['category'];

@@ -9,57 +9,62 @@ class View_Admin_Helper {
 		$this->id = $id;
 		$this->model = $model;
 		$this->db = Database::Instance();
-		$this->helper = ViewHelper::Instance();
 	}
 
 	public function notice($message) {
-		$this->helper->jsDocumentReadyFunction("$('#message').text('{$message}').show().fadeOut(4000);");
+		ViewHelper::Instance()->jsDocumentReadyFunction("$('#message').text('{$message}').show().fadeOut(4000);");
 	}
 
 	public function addView() {
 		$fields = '';
 
-		$model = new $this->model($this->db);
-		$fields = $model->fields;
+		if ( isset($this->model) ){
+			$model = new $this->model($this->db);
+			$fields = $model->fields;
 
-		switch ($this->model) :
+			switch ($this->model) :
 
-		case 'Article':
-			$headline = "Lägg till artikel";
-			break;
-		
-		case 'Object':
-			$headline = "Lägg till objekt";
-			break;
+			case 'Article':
+				$headline = "Lägg till artikel";
+				break;
+			
+			case 'Object':
+				$headline = "Lägg till objekt";
+				break;
 
-		endswitch;
+			endswitch;
 
-		return $this->SetupForm('insert', $headline, $fields);
+			return $this->SetupForm('insert', $headline, $fields);
+		}
+		else return "Modellen saknas.";
 	}
 
 	public function editView() {
 		$fields = null;
 		$item = null;
 
-		$model = new $this->model($this->db);
-		$dropdown = $model->getAll();
+		if (isset($this->model)) {
+			$model = new $this->model($this->db);
+			$dropdown = $model->getAll();
 		
-		if (isset($this->id)) {
-				$fields = $model->fields;
-				$item = $model->getById($this->id);
-		}
-		switch ($this->model) {
+			if (isset($this->id)) {
+					$fields = $model->fields;
+					$item = $model->getById($this->id);
+			}
+			switch ($this->model) {
 
-		case 'Article':
-			$headline = "Ändra artikel";
-			break;
+			case 'Article':
+				$headline = "Ändra artikel";
+				break;
 
-		case 'Object':
-			$headline = "Ändra objekt";
-			break;
-		}
+			case 'Object':
+				$headline = "Ändra objekt";
+				break;
+			}
 	
-		return $this->setupForm('update', $headline, $fields, $dropdown, $item);
+			return $this->setupForm('update', $headline, $fields, $dropdown, $item);
+		}
+		else return "Modellen saknas.";
 	}
 
 	
@@ -110,7 +115,9 @@ class View_Admin_Helper {
 	private function setupFields($array, $item	) {
 		$html = '';
 		$separator = ($this->model=='Object') ? "<br>" : '';
-		$this->helper->jsDocumentReadyFunction("var shared = { position: { my: 'bottom left', at: 'top right' }, style: { classes: 'ui-tooltip-rounded ui-tooltip-green' } }");
+
+		// Add the properties for tooltip
+		ViewHelper::Instance()->jsDocumentReadyFunction("var shared = { position: { my: 'bottom left', at: 'top right' }, style: { classes: 'ui-tooltip-rounded ui-tooltip-green' } }");
 
 		foreach ($array as $val) {
 			$html .= "\n\t<label for=".$val['name']."> ".$val['label'].": </label>";
@@ -120,8 +127,9 @@ class View_Admin_Helper {
 			else {
 				$html .= "\n\t<input class={$this->model} type=".$val['type']."  name=".$val['name']." id=".$val['name']." value='".$item[0][$val['name']]."'>{$separator}";
 			}
+
 			// Get some nice tooltips
-			$this->helper->jsDocumentReadyFunction("$('#".$val['name']."').qtip( $.extend({}, shared, { content: 'Tillåtna taggar: ".htmlentities($val['tags'])." '}));");
+			ViewHelper::Instance()->jsDocumentReadyFunction("$('#".$val['name']."').qtip( $.extend({}, shared, { content: 'Tillåtna taggar: ".htmlentities($val['tags'])." '}));");
 			
 		}
 

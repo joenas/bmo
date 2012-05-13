@@ -72,7 +72,7 @@ form.inline p { margin-bottom:0; }
 .alert, 
 .notice,
 .success, 
-.info       { padding: 0.4em; border: 2px solid #ddd; }
+.info       { padding: 0.4em; border: 2px solid #ddd; margin: 0 auto; font-size: 0.8em;}
 
 .error, .alert { background: #fbe3e4; color: #8a1f11; border-color: #fbc2c4; }
 .notice     { background: #fff6bf; color: #514721; border-color: #ffd324; }
@@ -83,14 +83,5 @@ form.inline p { margin-bottom:0; }
 .success a  { color: #264409; }
 .info a      { color: #205791; }
 
-
-form.editStyleForm ,
-textarea.editStyleText{
-	max-width: 60em;
-	width: 100%;
-	font-size: 0.9em;
-	min-height: 40em;
-	overflow: auto;
-}
 
 

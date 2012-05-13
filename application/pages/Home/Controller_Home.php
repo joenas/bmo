@@ -24,10 +24,12 @@ class Controller_Home extends CoreController {
 
 		$article = new Article($db);
 
-		$res = $article->getArticle('home', 'category');
+		$res = $article->getAllByIndex('category', 'home');
 		$this->data['id'] = $res[0]['id'];
 		$this->data['view_title'] = $res[0]['title'];
 		$this->data['view_content'] = $res[0]['content'];
+
+		$this->debug->message("testar debug",__LINE__, __FILE__);
 
 	}
 

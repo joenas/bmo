@@ -16,14 +16,20 @@ class Controller_Admin extends CoreController {
 		$this->authenticated = $this->login->userIsAuthenticated();
 
 		$this->db = Database::Instance();
-
-		// Basic variables for template
-		$this->data['pageId'] = "admin";
-		$this->data['title'] = "BMO Admin";
-		if (!isset($this->data['pageStyle'])) { $this->data['pageStyle'] = "header.logo { display: none; }"; }
-		
+		//$this->data['pageStyle'] = '';
 	}
 
+	public function getData() {
+				// Basic variables for template
+		$this->data['pageId'] = "admin";
+		$this->data['title'] = "BMO Admin";
+		
+		$this->data['pageStyle'] = <<< EOD
+div.secondary { width: 10%; } header.logo { display: none; } div.primary { width: 90%; }
+EOD;
+
+		return $this->data;
+	}
 
 	// Default View
 	public function index() {
@@ -32,12 +38,12 @@ class Controller_Admin extends CoreController {
 		if ($this->authenticated===false) {
 				// Default action, show the login form
 				$this->data['view'] = $this->login->userLoginForm($this->baseUrl);
+				//$this->data['pageStyle'] = "div.primary { width: 100%; } ";
 		} 
 		// User is logged in
 		else {
 			$this->data['view'] = "<p>Du är nu inloggad. Välj en funktion till höger.</p>";
 		}
-		$this->data['pageStyle'] = '';
 	}
 
 
@@ -47,10 +53,17 @@ class Controller_Admin extends CoreController {
 		if ($this->authenticated===false) {
 			$this->index();
 		} else {
+
+			// Get model type and id
 			$this->requestParser();
 
+			// Create the helper
 			$viewHelper = new View_Admin_Helper($this->model, $this->id);
+
+			// Set notice to View if available
 			$message = isset($this->message) ? $viewHelper->notice($this->message) : null;		
+
+			// Setup the editor View
 			$this->data['view'] = $viewHelper->editView();
 		}
 	}	
@@ -61,8 +74,14 @@ class Controller_Admin extends CoreController {
 		if ($this->authenticated===false) {
 			$this->index();
 		} else {
+
+			// Get model type and id
 			$this->requestParser();
+
+			// Create the helper
 			$viewHelper = new View_Admin_Helper($this->model, null);
+
+			// Setup the add View
 			$this->data['view'] = $viewHelper->addView();
 		}		
 	}
@@ -74,6 +93,7 @@ class Controller_Admin extends CoreController {
 			$this->index();
 		}	else if ( isset($_POST['save']) && $_POST['save']==true) {
 
+				// Get the model type and id
 				$this->requestParser();
 
 				// Create Model, for example 'Article'
@@ -99,6 +119,7 @@ class Controller_Admin extends CoreController {
 	// Deletes from database and redirects to edit View
 	public function delete() {
 		
+		// Get the model type and id
 		$this->requestParser();
 		
 		// Not logged in / id OR type isnt set
@@ -108,7 +129,10 @@ class Controller_Admin extends CoreController {
 		// Both id and type are set	
 		else  {
 
+				// Create the model, for example 'Article'
 				$model = new $this->model($this->db);
+
+				// Delete the post
 				$model->deleteById($this->id);
 
 			  switch ($this->model) {
@@ -120,6 +144,8 @@ class Controller_Admin extends CoreController {
 					$this->message = "Objektet har tagits bort.";
 					break;
 			}
+
+			// Unset posted id and do not send id to new View, post is gone!
 			unset($_POST['id']);
 			$this->reroute('edit', $this->model);
 		}
@@ -132,12 +158,18 @@ class Controller_Admin extends CoreController {
 		} 
 		else if (isset($_POST['save']) && $_POST['save']==true) { 
 
+			// Get the model type and id
 			$this->requestParser();
+
+			// Create the model, for example 'Article'
+			$model = new $this->model($this->db);
+
+			// Create the post
+			$res = $model->create( $_POST );
+
 			switch ($this->model) {
 			
 			case "Article":
-				$article = new Article($this->db);
-				$res = $article->create( $_POST );
 				// Insert successful
 				if ($res!=='0') {
 					$this->message = "Artikeln har lagts till.";
@@ -145,15 +177,13 @@ class Controller_Admin extends CoreController {
 				break;
 
 			case "Object":
-				$object = new Object($this->db);
-				$res = $object->create( $_POST['title'], $_POST['category'], 
-												$_POST['image'], $_POST['owner'], $_POST['text'] );
-				// Insert successful
 				if ($res!=='0') {
 					$this->message = "Objektet har lagts till.";
 				}
 				break;
 			}
+
+			// Reroute to edit View with the new post id
 			$this->reroute('edit', $this->model, $res);
 		}
 	}
@@ -166,15 +196,15 @@ class Controller_Admin extends CoreController {
 		if ($res!==false) {
 			$this->redirectPage('admin');
 		} else {
-			$this->data['view'] = 	$this->login->userLoginForm(
+			$this->data['view'] = $this->login->userLoginForm(
 									$this->baseUrl, 
 									"Du lyckades ej logga in. Felaktigt konto eller lösenord.", 
 									"error" );
-			$this->data['pageStyle'] = '';
+			$this->data['pageStyle']  = "div.primary { width: 100%; } ";
 		}
 	}
 	
-	// Logout
+	// Logout and redirect
 	public function logout() {
 			$this->login->userLogout();
 			$this->redirectPage('admin');
@@ -182,11 +212,13 @@ class Controller_Admin extends CoreController {
 
 	// Gets the need id and object type for editing etc
 	private function requestParser() {
+
 		// Arguments from request, ie 'article' or 'object'
 		$this->model = 	!isset($this->model) 
 											? isset($this->request->arguments[2]) ? $this->request->arguments[2] : null 
 										: $this->model;
 		$this->model = ucfirst($this->model);
+		$this->model = class_exists($this->model) ? $this->model : null;
 
 		// Check for id in $_POST first, then in request URL 		
 		$this->id = !isset($this->id) 
