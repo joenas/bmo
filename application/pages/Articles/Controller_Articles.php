@@ -28,7 +28,7 @@ class Controller_Articles extends CoreController {
 			$this->index();
 		} else {
 			// Controller helper
-			$this->viewHelper = new View_Articles_Helper($this->request->baseUrl."hej");	
+			$this->viewHelper = new View_Articles_Helper($this->request->baseUrl);	
 
 			// The main View
 			$this->data['view_article'] = $this->viewHelper->articleView($this->request->arguments[2]);
