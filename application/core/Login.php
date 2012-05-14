@@ -84,7 +84,7 @@ class Login {
     }
 
     $html = <<< EOD
-    <form method="post" action="{$baseUrl}/admin/login" class="login">
+    <form method="post" action="{$baseUrl}admin/login" class="login">
     <fieldset>
       <legend class="login">Admin</legend>
       <p>

@@ -4,7 +4,7 @@ class View_Articles_Helper {
 
 	public function __construct($baseUrl) {
 		$this->baseUrl = $baseUrl;
-		
+
 		$this->db = Database::Instance();
 		$this->articles = new Article($this->db);
 	}
@@ -32,7 +32,7 @@ class View_Articles_Helper {
 			$html .= "<h3>".$val['title']."</h3>";	
 			//$html .= " <small><em>".$val['author']." - Publicerad: </small><span class='date'>".$val['pubdate']."</span></em>";
 			$html .= substr($val['content'], 0, 250)."...";
-			$html .= " <a href='{$this->baseUrl}articles/show/".$val['permalink']."'>Läs mer </a>";
+			$html .= " <a href='{$this->baseUrl}/articles/show/".$val['permalink']."'>Läs mer </a>";
 			$html .= "<div class='spacer'></div>";
 		}
 		return $html;
@@ -44,7 +44,7 @@ class View_Articles_Helper {
 
 		$html = "<h2>Artiklar</h2><ul>";
 		foreach ($array as $val) {
-			$html .= "<li><a href='{$this->baseUrl}articles/show/".$val['permalink']."'>".$val['title']."</a></li>";
+			$html .= "<li><a href='{$this->baseUrl}/articles/show/".$val['permalink']."'>".$val['title']."</a></li>";
 		}
 		$html .= "</ul>";
 		return $html;

@@ -9,6 +9,8 @@ class View_Admin_Helper {
 		$this->id = $id;
 		$this->model = $model;
 		$this->db = Database::Instance();
+		$this->request = new Request();
+		$this->request->parse();
 	}
 
 	public function notice($message) {
@@ -79,7 +81,7 @@ class View_Admin_Helper {
 		if (isset($dropdown)) {
 			
 			$dropdown = $this->setupDropDown($dropdown);
-			$html .= "\n\t<form method='post' action='/admin/edit/{$this->model}'>\n\t<input type=hidden name='show' value='true'>\n\t<fieldset><legend>Välj:</legend>";
+			$html .= "\n\t<form method='post' action='{$this->request->baseUrl}admin/edit/{$this->model}'>\n\t<input type=hidden name='show' value='true'>\n\t<fieldset><legend>Välj:</legend>";
 	  	$html .= "\n\t<div class='editor-dropdown'>\n\t{$dropdown}\n\t</div>";
 	  	$html .= "\n\t<div class='editor-message notice' id='message'></div>\n";
 	  	$html .= "\n\t</fieldset></form>";
@@ -96,9 +98,9 @@ class View_Admin_Helper {
 	<p class='editor' style='font-size: 0.7em; display: block;'>Håll musen över ett fält för att se tillåtna taggar.</p>
 	<input type=hidden name=id value={$this->id}>
 	<input type=hidden name=type value={$this->model}>{$the_fields}
-	<button type=submit id=save name='save' value='true' class='editor' data-url='/admin/{$action}/{$this->model}'>Spara</button>
+	<button type=submit id=save name='save' value='true' class='editor' data-url='{$this->request->baseUrl}admin/{$action}/{$this->model}'>Spara</button>
 	<button type=reset class='editor'>Ångra</button>
-	<button type=submit id=delete name='delete' value='true' class='editor' data-url='/admin/delete/{$this->model}' {$disabled}>Ta bort</button>
+	<button type=submit id=delete name='delete' value='true' class='editor' data-url='{$this->request->baseUrl}admin/delete/{$this->model}' {$disabled}>Ta bort</button>
 	</fieldset>
 	</form>
 	<div id='dialog-confirm' class='ui-dialog' title='Ta bort?'>
