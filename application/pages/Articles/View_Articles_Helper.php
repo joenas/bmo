@@ -4,6 +4,7 @@ class View_Articles_Helper {
 
 	public function __construct($baseUrl) {
 		$this->baseUrl = $baseUrl;
+		
 		$this->db = Database::Instance();
 		$this->articles = new Article($this->db);
 	}

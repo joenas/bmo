@@ -3,8 +3,6 @@
 class Controller_Articles extends CoreController {
 
 	public function __construct() { 
-		// Controller helper, needed in all methods
-		$this->viewHelper = new View_Articles_Helper('/');
 	}
 
 	public function getData() {
@@ -14,7 +12,8 @@ class Controller_Articles extends CoreController {
 	}
 
 	public function index() {
-		
+		// Controller helper
+		$this->viewHelper = new View_Articles_Helper($this->request->baseUrl);	
 		// The main View
 		$this->data['view_article_list'] = $this->viewHelper->articleList();
 		// The sidebar
@@ -28,6 +27,9 @@ class Controller_Articles extends CoreController {
 		if (!isset($this->request->arguments[2])) {
 			$this->index();
 		} else {
+			// Controller helper
+			$this->viewHelper = new View_Articles_Helper($this->request->baseUrl."hej");	
+
 			// The main View
 			$this->data['view_article'] = $this->viewHelper->articleView($this->request->arguments[2]);
 			// The sidebar
