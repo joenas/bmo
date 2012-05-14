@@ -39,8 +39,6 @@ class Request {
 		$this->method = $method;
 		$this->arguments = $arguments;
 
-		echo "in request: " . $this->baseUrl;
-
 	}
 }
 
