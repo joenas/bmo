@@ -14,7 +14,8 @@ class Request {
 		// Get request and baseUrl dir
 		$requestUri = $_SERVER['REQUEST_URI'];
 		$scriptName = $_SERVER['SCRIPT_NAME'];
-		$baseUrl = dirname($scriptName).'/';
+		$baseUrl = dirname($scriptName);
+		$baseUrl = ($baseUrl=='/') ? $baseUrl : $baseUrl.'/';
 		$request = trim( substr($requestUri, strlen(rtrim($baseUrl, '/'))), '/' );
 
 		// Get query part of request

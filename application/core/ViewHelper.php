@@ -22,8 +22,8 @@ class ViewHelper {
 	public function Link($link, $type = 'href', $abaseUrl = null) {
 
 		// If provided with new baseUrl, use that. Otherwise check for root and alter or use regular			
-		$baseUrl = ( isset($abaseUrl) ) ? $abaseUrl : ($this->baseUrl=='/') ? '' : $this->baseUrl;
-		print $type . "='$baseUrl/$link'";
+		$baseUrl = ( isset($abaseUrl) ) ? $abaseUrl : $this->baseUrl;
+				print $type . "='{$baseUrl}{$link}'";
 	
 	}
 
