@@ -1,4 +1,6 @@
   <div class="tertiary">
+      <?php echo isset($view_sidebar) ? $view_sidebar : ""; ?>
+
   </div>
 
   <!-- primary content -->
@@ -11,5 +13,4 @@
 
   <!-- secondary content -->
   <div class="secondary">
-  <p>Här kan man ha länkar.</p>
   </div>

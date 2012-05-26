@@ -20,6 +20,9 @@ class Controller_Objects extends CoreController {
 
 		$object = new Object($db);
 
+		//echo urldecode($this->request->arguments[2]);
+
+
 		$res = $object->getById('7');
 		$this->data['id'] = $res[0]['id'];
 		$this->data['view_title'] = $res[0]['title'];
@@ -27,6 +30,13 @@ class Controller_Objects extends CoreController {
 		$this->data['view_text'] = $res[0]['text'];
 		$this->data['view_image'] = "<img src=".$res[0]['image'].">";
 
+		$array = $object->getColumnDistinct('category');
+		$html = '<h2>Kategorier</h2><ul>';
+		foreach ($array as $val) {
+			$html .= "<li><a href={$this->baseUrl}objects/category/".$val['category'].">".$val['category']."</a></li>";
+		}
+		$html .= "</ul>";
+		$this->data['view_sidebar'] = $html;
 	}
 	
 }

@@ -8,6 +8,7 @@
 	<!-- links to external stylesheets -->
 	<link rel="stylesheet" <?php $this->helper->Link(CSS.'ui-lightness/jquery-ui-1.8.20.custom.css');?> title="standard stylesheet" type='text/css'>
 	<link rel="stylesheet" <?php $this->helper->Link(CSS.'qtip.css');?> title="standard stylesheet" type='text/css'>
+	<link rel="stylesheet" <?php $this->helper->Link(CSS.'colorbox.css');?> title="standard stylesheet" type='text/css'>	
   <link href='http://fonts.googleapis.com/css?family=Bilbo+Swash+Caps|Trocchi|Karla|Nothing+You+Could+Do' rel='stylesheet' type='text/css'>
   <link rel='stylesheet' <?php $this->helper->Link(CSS.'style.php');?> type='text/css' media='all'>
 
@@ -39,7 +40,11 @@ echo Debug::Instance()->output();
 		<a <?php $this->helper->Link('objects');?> id="objects-">Objekt</a>
 		<a <?php $this->helper->Link('gallery');?> id="gallery-">Galleri</a>
 		<a <?php $this->helper->Link('about');?> id="about-">Om BMO</a>
-		<a <?php $this->helper->Link('admin');?> id="admin-">Admin</a>				
+<!-- 		<a <?php $this->helper->Link('admin');?> id="admin-">Admin</a>				 -->
+	<div style="float: right;">
+		<a href="/admin"><img src="/img/icons/glyphicons_280_settings.png"></a>
+	</div>
+
 	</nav>	
 </header>
 
@@ -87,9 +92,13 @@ require( $this->view );
 <script <?php $this->helper->Link('js/jquery-1.7.2.min.js', 'src');?> type="text/javascript"></script>
 <script <?php $this->helper->Link('js/jquery.qtip.js', 'src');?> type="text/javascript"></script>	
 <script <?php $this->helper->Link('js/jquery-ui-1.8.20.custom.min.js', 'src');?> type="text/javascript"></script>
+<script <?php $this->helper->Link('js/jquery.colorbox.js', 'src');?> type="text/javascript"></script>
 <script <?php $this->helper->Link('js/admin.js', 'src');?> type="text/javascript"></script>
 
 <?php echo $this->helper->getJsFunctions(); ?>
+
+
+	
 
 </body>
 </html>

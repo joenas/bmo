@@ -17,6 +17,7 @@ class ViewHelper {
 		$request = new Request();
 		$request->Parse();
 		$this->baseUrl = $request->baseUrl;
+		$this->db = Database::Instance();
 	}
 
 	public function Link($link, $type = 'href', $abaseUrl = null) {
@@ -78,5 +79,59 @@ class ViewHelper {
 		}
 		else return false;
 	}
+
+	public function searchField() {
+		$this->jsDocumentReadyFunction("$.widget( 'custom.catcomplete', $.ui.autocomplete, {
+		_renderMenu: function( ul, items ) {
+			var self = this,
+				currentCategory = '';
+			$.each( items, function( index, item ) {
+				if ( item.category != currentCategory ) {
+					ul.append( '<li class=ui-autocomplete-category>' + item.category + '</li>' );
+					currentCategory = item.category;
+				}
+				self._renderItem( ul, item );
+			});
+		}
+	});");
+
+		$articles = new Article($this->db);
+		$objects = new Object($this->db);
+
+		$articlesArray = $articles->getAllByIndex('category', 'article');
+		$objectsArray = $objects->getAll();
+
+		$data = "$(function() { var data = [ ";
+		foreach ($articlesArray as $val ) {
+			$data .= "\n{ label: '" . $val['title'] . "', category: 'Artiklar', href: '/articles/show/". $val['permalink']."' },";
+		}
+		foreach ($objectsArray as $val ) {
+			//$data .= "\n{ label: '" . $val['title'] . "', category: '" . $val['category']. "' },";
+			$data .= "\n{ label: '" . $val['title'] . "', category: 'Objekt' },";
+		}
+
+
+		$data .= "];";
+		$data .= "
+			$( '#search' ).catcomplete({ 
+				delay: 0, 
+				source: data,
+				select: function( event, ui ) {
+					window.location = ui.item.href;
+
+				return false;
+				}
+
+			});
+		});";
+		$this->jsDocumentReadyFunction($data);
+
+		echo <<< EOD
+		<form action='{$this->baseUrl}search' method=post>
+		<label for='search'>Sök: </label><input id='search' />
+		</form>
+EOD;
+	}
+
 
 }

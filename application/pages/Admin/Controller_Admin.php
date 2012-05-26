@@ -81,6 +81,9 @@ EOD;
 			// Create the helper
 			$viewHelper = new View_Admin_Helper($this->model, null);
 
+			// Set notice to View if available
+			$message = isset($this->message) ? $viewHelper->notice($this->message) : null;
+
 			// Setup the add View
 			$this->data['view'] = $viewHelper->addView();
 		}		
@@ -167,24 +170,26 @@ EOD;
 			// Create the post
 			$res = $model->create( $_POST );
 
-			switch ($this->model) {
-			
-			case "Article":
-				// Insert successful
-				if ($res!=='0') {
-					$this->message = "Artikeln har lagts till.";
-				}
-				break;
-
-			case "Object":
-				if ($res!=='0') {
-					$this->message = "Objektet har lagts till.";
-				}
-				break;
+			if ($res==0) {
+				$this->message = "Det gick ej att lägga till, vänligen kontrollera databasen";
+				$this->id = null;
+				$this->reroute('add', $this->model);
 			}
+			else { // Insert successful
+				switch ($this->model) {
+				
+				case "Article":
+					$this->message = "Artikeln har lagts till.";
+				break;
 
+				case "Object":
+					$this->message = "Objektet har lagts till.";
+				break;
+				}
+				$this->reroute('edit', $this->model, $res);
+			}
 			// Reroute to edit View with the new post id
-			$this->reroute('edit', $this->model, $res);
+			
 		}
 	}
 

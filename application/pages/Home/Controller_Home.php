@@ -29,7 +29,7 @@ class Controller_Home extends CoreController {
 		$this->data['view_title'] = $res[0]['title'];
 		$this->data['view_content'] = $res[0]['content'];
 
-		$this->debug->message("testar debug",__LINE__, __FILE__);
+		//$this->debug->message("testar debug",__LINE__, __FILE__);
 
 	}
 

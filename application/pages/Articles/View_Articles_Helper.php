@@ -62,7 +62,7 @@ class View_Articles_Helper {
 			$divmain = ($i%2 == 0) ? "</div><div class='articles-image'>" : '';
 			$float = ($i%2 == 0) ? "left" : "right";
 			$i++;
-			$html .= $divmain."\n\t<figure class='articles {$float}'><img class='articles' src='{$this->baseUrl}".str_replace('/bmo/', '/bmo/250/', $val['image'])."' alt='".$val['title']."'";
+			$html .= $divmain."\n\t<figure class='articles {$float}'><img class='articles' src='{$this->baseUrl}".str_replace('/bmo/', '/bmo/250/', $val['image'])."' alt='".$val['title']."' ";
 			//$html .= "\n\t<figcaption class='articles'>".$val['text']."</figcaption></figure>";
 			$html .= "title='".$val['text']."'>\n\t<figcaption class='articles'>".$val['text']."</figcaption></figure>";
 		}

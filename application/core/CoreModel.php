@@ -26,6 +26,11 @@ class CoreModel {
 		return $this->db->ExecuteSelectQueryAndFetchAll($query, $params);
 	}
 
+	public function getColumnDistinct($column) {
+		$query = "SELECT DISTINCT {$column} FROM " . $this->table . ";";
+		return $this->db->ExecuteSelectQueryAndFetchAll($query);
+	}
+
 	//----------------------
 	public function deleteById($id) {
   

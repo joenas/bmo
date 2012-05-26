@@ -76,45 +76,54 @@ class View_Admin_Helper {
 		$disabled = isset($dropdown) ? '' : 'disabled';
 		$html = "<h2>{$headline}</h2>";
 		//var_dump($res);
-		
+		$html .= "\n\t<div class='editor-message notice' id='message'></div><br>\n";
 		// Dropdown menu
 		if (isset($dropdown)) {
 			
 			$dropdown = $this->setupDropDown($dropdown);
 			$html .= "\n\t<form method='post' action='{$this->request->baseUrl}admin/edit/{$this->model}'>\n\t<input type=hidden name='show' value='true'>\n\t<fieldset><legend>Välj:</legend>";
-	  	$html .= "\n\t<div class='editor-dropdown'>\n\t{$dropdown}\n\t</div>";
-	  	$html .= "\n\t<div class='editor-message notice' id='message'></div>\n";
-	  	$html .= "\n\t</fieldset></form>";
-
+		  	$html .= "\n\t<div class='editor-dropdown'>\n\t{$dropdown}\n\t</div>";
+	  	
+	  		$html .= "\n\t</fieldset></form>";
 		}
 
-	// The fields for adding or updating 
-	if (isset($fields)) {
+		// The fields for adding or updating 
+		if (isset($fields)) {
 
-	$the_fields = $this->setupFields($fields, $item);
+		$the_fields = $this->setupFields($fields, $item);
 
-	$html .= "\n\t<form method='post' action='action' class='editor' id=view>
-	<fieldset>
-	<p class='editor' style='font-size: 0.7em; display: block;'>Håll musen över ett fält för att se tillåtna taggar.</p>
-	<input type=hidden name=id value={$this->id}>
-	<input type=hidden name=type value={$this->model}>{$the_fields}
-	<button type=submit id=save name='save' value='true' class='editor' data-url='{$this->request->baseUrl}admin/{$action}/{$this->model}'>Spara</button>
-	<button type=reset class='editor'>Ångra</button>
-	<button type=submit id=delete name='delete' value='true' class='editor' data-url='{$this->request->baseUrl}admin/delete/{$this->model}' {$disabled}>Ta bort</button>
-	</fieldset>
-	</form>
-	<div id='dialog-confirm' class='ui-dialog' title='Ta bort?'>
-	<p><span class='ui-icon ui-icon-alert' style='float:left; margin:0 7px 20px 0;'></span>Artikeln kommer att tas bort, är du säker?</p>
-	</div>";
+		$html .= "\n\t<form method='post' action='action' class='editor' id=view>
+		<fieldset>
+		<p class='editor' style='font-size: 0.7em; display: block;'>Håll musen över ett fält för att se tillåtna taggar.</p>
+		<input type=hidden name=id value={$this->id}>
+		<input type=hidden name=type value={$this->model}>{$the_fields}
 
+		<button type=submit id=save name='save' value='true' class='editor' data-url='{$this->request->baseUrl}admin/{$action}/{$this->model}'>Spara</button>
+		<button type=reset id=reset class='editor'>Ångra</button>
+		<button type=submit id=delete name='delete' value='true' class='editor' data-url='{$this->request->baseUrl}admin/delete/{$this->model}' {$disabled}>Ta bort</button>
 
-	}
+		</fieldset>
+		</form>
+		<div id='dialog-confirm' class='ui-dialog' title='Ta bort?'>
+		<p><span class='ui-icon ui-icon-alert' style='float:left; margin:0 7px 20px 0;'></span>Artikeln kommer att tas bort, är du säker?</p>
+		</div>";
+		}
+
+		ViewHelper::Instance()->jsDocumentReadyFunction("
+		$( '#save' ).button({
+			icons: {
+				primary: 'save-button'
+			}
+		});
+		$( 'button' ).button({
+		});
+		");
 
 	return $html;
 
 	}
 
-	private function setupFields($array, $item	) {
+	private function setupFields($array, $item) {
 		$html = '';
 		$separator = ($this->model=='Object') ? "<br>" : '';
 
@@ -132,8 +141,10 @@ class View_Admin_Helper {
 
 			// Get some nice tooltips
 			ViewHelper::Instance()->jsDocumentReadyFunction("$('#".$val['name']."').qtip( $.extend({}, shared, { content: 'Tillåtna taggar: ".htmlentities($val['tags'])." '}));");
-			
+
 		}
+		// Date picker for field
+		ViewHelper::Instance()->jsDocumentReadyFunction("$( '#pubdate' ).datepicker( { dateFormat: 'yy-mm-dd' } );");
 
 		return $html;
 	}

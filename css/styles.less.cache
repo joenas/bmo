@@ -1,4 +1,4 @@
-a:4:{s:4:"root";s:11:"styles.less";s:8:"compiled";s:4576:"@import url("forms.css");
+a:4:{s:4:"root";s:11:"styles.less";s:8:"compiled";s:5067:"@import url("forms.css");
 @import url("source.css");
 .bilbo { font-family:'Bilbo Swash Caps', cursive; }
 .nothing { font-family:'Nothing You Could Do', cursive; }
@@ -222,6 +222,36 @@ div.articles-image {
   max-width:600px;
   margin:0 auto 2em auto;
 }
+img.thumbnail {
+  width:70px;
+  height:70px;
+  border:1px solid black;
+  margin:5px;
+}
+.ui-autocomplete-category {
+  font-weight:bold;
+  padding:.2em .4em;
+  margin:.8em 0 .2em;
+  line-height:1.5;
+  color:#960400;
+}
+.ui-autocomplete {
+  font-size:1em;
+  max-width:300px;
+  max-height:200px;
+  overflow-y:auto;
+  overflow-x:hidden;
+  padding-right:20px;
+}
+.ui-state-hover a {
+  color:#960400;
+  background:none;
+}
+.ui-button-text {
+  font-size:0.8em;
+  font-weight:normal;
+  color:#960400;
+}
 @media screen and (max-width: 1190px) {
 }
 @media screen and (max-width: 1024px) and (min-width: 768px) {
@@ -230,4 +260,4 @@ div.articles-image {
 }
 @media only screen and (max-width: 479px) {
 }
-";s:5:"files";a:1:{s:61:"/home/jon/wwwroot/enabled_hosts/jonnev.se/bmo/css/styles.less";i:1336939832;}s:7:"updated";i:1336939834;}
+";s:5:"files";a:1:{s:61:"/home/jon/wwwroot/enabled_hosts/jonnev.se/bmo/css/styles.less";i:1337993640;}s:7:"updated";i:1337993642;}

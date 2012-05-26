@@ -1,6 +1,7 @@
   <div class="tertiary">
       <?php echo isset($view_article_sidebar) ? $view_article_sidebar : ''; ?>
 
+      <?php $this->helper->searchField(); ?>
   </div>
 
   <!-- primary content -->
