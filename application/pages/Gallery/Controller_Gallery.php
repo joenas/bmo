@@ -9,7 +9,7 @@ class Controller_Gallery extends CoreController {
 	public function getData() {
 		$this->data['pageId'] = "gallery";
 		$this->data['title'] = "Galleri";
-		//$this->data['pageStyle'] = 'div.primary { width: 60%; margin: 0 auto; }';
+		$this->data['pageStyle'] = 'div.primary { width: 60%; margin: 0 auto; }';
 		return $this->data;
 	}
 
@@ -19,9 +19,14 @@ class Controller_Gallery extends CoreController {
 		$object = new Object($this->db);
 		$array = $object->getAll();
 
-		$html = "";
+		$html = "<div>";
+		$i = 0;
 		foreach ($array as $val) {
-			$html .= "\n\n\t<a class=gallery href={$this->baseUrl}".str_replace('/bmo/', '/bmo/550/', $val['image'])." title='".$val['title']."'>";
+			if ($i%6==0) {
+				$html .= "</div>\n\t<div>";
+			}
+			$i++;
+			$html .= "\n\t<a class=gallery href={$this->baseUrl}".str_replace('/bmo/', '/bmo/550/', $val['image'])." title='".$val['title']."'>";
 			$html .= "\n\t<img class='thumbnail' title='".$val['title']."' src=".str_replace('/bmo/', '/bmo/250/', $val['image'])."></a>";
 		}
 

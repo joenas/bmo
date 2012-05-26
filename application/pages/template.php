@@ -42,7 +42,7 @@ echo Debug::Instance()->output();
 		<a <?php $this->helper->Link('about');?> id="about-">Om BMO</a>
 <!-- 		<a <?php $this->helper->Link('admin');?> id="admin-">Admin</a>				 -->
 	<div style="float: right;">
-		<a href="/admin"><img src="/img/icons/glyphicons_280_settings.png"></a>
+		<a href="/admin"><img src="/img/icons/glyphicons_280_settings.png" alt="Admin pages"></a>
 	</div>
 
 	</nav>	
@@ -80,10 +80,17 @@ require( $this->view );
 	</p>
 	</div>
 	<div class="rightfoot">
-	<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" <?php $this->helper->Link('img/html5/cc-by-sa.png', 'src');?> /></a> 
+<!-- 		<p>
+		<a <?php $this->helper->Link('home');?> id="home-">Hem</a>
+		<a <?php $this->helper->Link('articles');?> id="articles-">Artiklar</a>
+		<a <?php $this->helper->Link('objects');?> id="objects-">Objekt</a>
+		<a <?php $this->helper->Link('gallery');?> id="gallery-">Galleri</a>
+		<a <?php $this->helper->Link('about');?> id="about-">Om BMO</a>
+ -->	<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" <?php $this->helper->Link('img/html5/cc-by-sa.png', 'src');?> /></a> 
 	<a href="http://validator.w3.org/check/referer"><img alt="Valid HTML5" <?php $this->helper->Link('img/html5/HTML5_Logo_32.png', 'src'); ?>></a>
 	<a href="http://jigsaw.w3.org/css-validator/check/referer"><img height='19' <?php $this->helper->Link('img/html5/vcss-blue.gif', 'src'); ?> alt="Valid CSS!" /></a>
 	Design &copy; Jon Neverland - Version <?php echo exec('git tag'); ?>
+	</p>
 	</div>
 
 	</footer>

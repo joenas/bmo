@@ -10,16 +10,10 @@ class View_Articles_Helper {
 	}
 
 	// Create html for showing an article
-	public function articleView($link) {
-			$array = $this->articles->getByLink($link);
-
-			if (!empty($array)) {
+	public function articleView($array) {
 				$html = "<h2>".$array[0]['title']."</h2><div class='content'>";
 				$html .= str_replace('img/', "{$this->baseUrl}img/", $array[0]['content']);
 				$html .= "</div><span class='articlefooter'> <small>".$array[0]['author']." - Publicerad: </small><span class='date'>".$array[0]['pubdate']."</span></span>";
-			} else {
-				$html = "<p>Artikeln hittades inte</p>";
-			}
 			return $html;			
 	}
 
@@ -56,7 +50,7 @@ class View_Articles_Helper {
 		$objects = new Object($this->db);
 		$array = $objects->getAllByIndex('category', $article[0]['imagecategory']);
 		
-		$html = "<div class=article-image-container style='clear: both;'>Relaterade bilder!";
+		$html = "<div class=article-image-container style='clear: both;'>";
 		$i = 0;
 		foreach ($array as $val) {
 			$divmain = ($i%2 == 0) ? "</div><div class='articles-image'>" : '';

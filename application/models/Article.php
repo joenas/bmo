@@ -10,7 +10,7 @@ class Article extends CoreModel {
 							'category' 	=> array('name' => 'category', 'label' => '<br>Kategori', 'type' => 'text', 'tags' => 'inga'),
 							'author'	=> array('name' => 'author', 'label' => 'Författare','type' =>'text', 'tags' => 'inga'),
 							'pubdate'	=> array('name' => 'pubdate', 'label' => 'Datum','type' =>'text', 'tags' => 'inga'),
-							'content'	=> array('name' => 'content', 'label' => '', 'type' =>'textarea', 'tags' => '<img><p><b><i><blockquote>')
+							'content'	=> array('name' => 'content', 'label' => '', 'type' =>'textarea', 'tags' => '<a><h1><h2><img><p><b><i><blockquote>')
 					);
 
 	 public function __construct($database) {

@@ -1,5 +1,10 @@
   <div class="tertiary">
-    &nbsp;
+    <ul><h2>Länklista</h2>
+      <li><a href="http://bth.se">Blekinge Tekniska Högskola</a></li>
+      <li><a href="http://php.net">php.net</a></li>
+      <li><a href="http://bth.se">bth.se</a></li>
+      <li><a href="http://bth.se">bth.se</a></li>
+
   </div>
 
   <!-- primary content -->
@@ -12,5 +17,5 @@
 
   <!-- secondary content -->
   <div class="secondary">
-  <p>Här kan man ha länkar.</p>
+
   </div>

@@ -25,9 +25,10 @@ class Object extends CoreModel {
  		// Remove unwanted tags
   	$this->clean($array);
   	extract($array);
+  	$permalink = $this->slugify($title);
 
-    $query = "INSERT INTO ".$this->table." (title, category, image, owner, text) VALUES(?, ?, ?, ?, ?)";
-    $params = array($title, $category, $image, $owner, $text);
+    $query = "INSERT INTO ".$this->table." (title, category, image, owner, text, permalink) VALUES(?, ?, ?, ?, ?, ?)";
+    $params = array($title, $category, $image, $owner, $text, $permalink);
     $this->db->ExecuteQuery($query, $params);
    	return $this->db->LastInsertId();
   }
@@ -39,9 +40,10 @@ class Object extends CoreModel {
 		// Remove unwanted tags
   	$this->clean($array);
   	extract($array);
+  	$permalink = $this->slugify($title);
 
-		$query = "UPDATE ".$this->table." SET title=?, category=?, image=?, owner=?, text=? WHERE id='{$id}'";
-		$params = array($title, $category, $image, $owner, $text);
+		$query = "UPDATE ".$this->table." SET title=?, category=?, image=?, owner=?, text=?, permalink=? WHERE id='{$id}'";
+		$params = array($title, $category, $image, $owner, $text, $permalink);
 		$this->db->ExecuteQuery($query, $params);
 	    
 		return $this->db->LastInsertId();

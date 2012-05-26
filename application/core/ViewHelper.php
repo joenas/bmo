@@ -107,7 +107,7 @@ class ViewHelper {
 		}
 		foreach ($objectsArray as $val ) {
 			//$data .= "\n{ label: '" . $val['title'] . "', category: '" . $val['category']. "' },";
-			$data .= "\n{ label: '" . $val['title'] . "', category: 'Objekt' },";
+			$data .= "\n{ label: '" . $val['title'] . "', category: 'Objekt', href: '/objects/show/". $val['permalink']. "' },";
 		}
 
 

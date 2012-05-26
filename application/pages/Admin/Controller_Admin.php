@@ -25,7 +25,7 @@ class Controller_Admin extends CoreController {
 		$this->data['title'] = "BMO Admin";
 		
 		$this->data['pageStyle'] = <<< EOD
-div.secondary { width: 10%; } header.logo { display: none; } div.primary { width: 90%; }
+ header.logo { display: none; } div.primary { width: 80%; }
 EOD;
 
 		return $this->data;

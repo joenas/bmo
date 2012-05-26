@@ -76,12 +76,12 @@ class View_Admin_Helper {
 		$disabled = isset($dropdown) ? '' : 'disabled';
 		$html = "<h2>{$headline}</h2>";
 		//var_dump($res);
-		$html .= "\n\t<div class='editor-message notice' id='message'></div><br>\n";
+		$html .= "\n\t<div class='editor-message notice' id='message'></div><br><br>\n";
 		// Dropdown menu
 		if (isset($dropdown)) {
 			
 			$dropdown = $this->setupDropDown($dropdown);
-			$html .= "\n\t<form method='post' action='{$this->request->baseUrl}admin/edit/{$this->model}'>\n\t<input type=hidden name='show' value='true'>\n\t<fieldset><legend>Välj:</legend>";
+			$html .= "\n\t<form method='post' action='{$this->request->baseUrl}admin/edit/{$this->model}'>\n\t<input type=hidden name='show' value='true'>\n\t";
 		  	$html .= "\n\t<div class='editor-dropdown'>\n\t{$dropdown}\n\t</div>";
 	  	
 	  		$html .= "\n\t</fieldset></form>";

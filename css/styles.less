@@ -172,6 +172,8 @@ div.mainwrapper {
 	padding-bottom: @footerheight;
 	min-height: 35em;
 	overflow: auto;
+		background: url('/img/design/Vinranka_90.jpg') repeat-y right top;
+
 }
 
 div.randimage {
@@ -198,6 +200,7 @@ div.secondary {
 	.right;
 	width: @divsecwidth;
 	//border: 1px solid red;
+	//min-height: 600px;
 	ul {
 		padding: 0.5em;
 	}
@@ -255,6 +258,7 @@ div.rightfoot {
 	.right;
 	margin: 20px 0;
 	font-size: 0.7em;
+	a { text-transform: uppercase	; font-size: 1.2em;}
 }
 
  /* Page styling classes */
@@ -268,7 +272,7 @@ article {
 		margin: 0 auto;
 	&.admin {
 		width: 80%;
-		.right;
+		.left;
 		margin-right: 3em;
 		overflow: auto;
 		input { 
@@ -310,7 +314,7 @@ article {
 	&.home {
 		blockquote {
 			font-style: italic;
-			color: lighten(@sectextcolor, 30%);
+			color: @sectextcolor;
 		}
 	}
 
