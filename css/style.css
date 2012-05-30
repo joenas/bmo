@@ -33,6 +33,7 @@ h1 {
   color:#960400;
   margin-top:0.5em;
 }
+li { line-height:1.7em; }
 .left { float:left; }
 .right { float:right; }
 header.top {
@@ -228,10 +229,17 @@ div.articles-image {
   margin:0 auto 2em auto;
 }
 img.thumbnail {
-  width:70px;
-  height:70px;
+  width:100px;
+  height:100px;
   border:1px solid black;
   margin:5px;
+}
+.object-view-text { float:right; }
+.object-view-image {
+  -webkit-border-radius:10px;
+  -moz-border-radius:10px;
+  border-radius:10px;
+  border:2px solid white;
 }
 .ui-autocomplete-category {
   font-weight:bold;
@@ -257,6 +265,24 @@ img.thumbnail {
   font-weight:normal;
   color:#960400;
 }
+.ui-accordion-header {
+  color:#960400;
+  font-size:1em;
+  background:none;
+  border:none;
+  margin:0px;
+  margin-left:1em;
+  padding:2px;
+}
+.ui-accordion-content {
+  background:none;
+  border:none;
+  margin:0px;
+  margin-left:1.8em;
+  font-size:0.8em;
+  line-height:1.8em;
+}
+.ui-state-hover .ui-icon, .ui-state-focus .ui-icon, .ui-state-default .ui-icon { background:none; }
 @media screen and (max-width: 1190px) {
 }
 @media screen and (max-width: 1024px) and (min-width: 768px) {

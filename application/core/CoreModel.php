@@ -20,6 +20,12 @@ class CoreModel {
 		return $this->db->ExecuteSelectQueryAndFetchAll($query, $params);
 	} 
 
+	public function getByLink($link) {
+		$query = 'SELECT * FROM ' . $this->table . " where permalink=?";
+		$params[] = $link;
+		return $this->db->ExecuteSelectQueryAndFetchAll($query, $params);
+	}
+
 	public function getAllByIndex($index, $search) {
 		$query = 'SELECT * FROM ' . $this->table . " where {$index}=?";
 		$params[] = $search;

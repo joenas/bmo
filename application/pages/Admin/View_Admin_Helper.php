@@ -84,7 +84,7 @@ class View_Admin_Helper {
 			$html .= "\n\t<form method='post' action='{$this->request->baseUrl}admin/edit/{$this->model}'>\n\t<input type=hidden name='show' value='true'>\n\t";
 		  	$html .= "\n\t<div class='editor-dropdown'>\n\t{$dropdown}\n\t</div>";
 	  	
-	  		$html .= "\n\t</fieldset></form>";
+	  		$html .= "\n\t</form><br>";
 		}
 
 		// The fields for adding or updating 

@@ -15,28 +15,40 @@ class Controller_Objects extends CoreController {
 	}
 
 	public function index() {
-
-		$db = Database::Instance();
-
-		$object = new Object($db);
+		$this->viewHelper = new View_Objects_Helper($this->request->baseUrl);	
 
 		//echo urldecode($this->request->arguments[2]);
+		$this->data['view_sidebar'] = $this->viewHelper->viewSidebar();	
+	}
+
+	public function show() {
 
 
-		$res = $object->getById('7');
-		$this->data['id'] = $res[0]['id'];
-		$this->data['view_title'] = $res[0]['title'];
-		$this->data['view_category'] = $res[0]['category'];
-		$this->data['view_text'] = $res[0]['text'];
-		$this->data['view_image'] = "<img src=".$res[0]['image'].">";
+		// No article ID to show
+		if (!isset($this->request->arguments[2])) {
+			$this->index();
+		} else {
+			
+			$this->viewHelper = new View_Objects_Helper($this->request->baseUrl);	
+			$this->data['view_sidebar'] = $this->viewHelper->viewSidebar();	
 
-		$array = $object->getColumnDistinct('category');
-		$html = '<h2>Kategorier</h2><ul>';
-		foreach ($array as $val) {
-			$html .= "<li><a href={$this->baseUrl}objects/category/".$val['category'].">".$val['category']."</a></li>";
+			// Controller helper
+			//$this->viewHelper = new View_Articles_Helper($this->request->baseUrl);	
+			// The sidebar
+			//$this->data['view_article_sidebar'] = $this->viewHelper->articleSidebar();
+	
+			// Try to fetch the requested article
+			$this->objects = new Object(Database::Instance());
+			$object = $this->objects->getByLink($this->request->arguments[2]);
+
+			if (!empty($object)) {
+				// The main View
+				$this->data['view_object'] = $this->viewHelper->objectView($object[0]);
+			} else {
+				$this->data['view_object'] = "<p>Objektet hittades inte</p>";
+			}
+
 		}
-		$html .= "</ul>";
-		$this->data['view_sidebar'] = $html;
 	}
 	
 }

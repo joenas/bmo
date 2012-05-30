@@ -1,4 +1,4 @@
-a:4:{s:4:"root";s:11:"styles.less";s:8:"compiled";s:5199:"@import url("forms.css");
+a:4:{s:4:"root";s:11:"styles.less";s:8:"compiled";s:5766:"@import url("forms.css");
 @import url("source.css");
 .bilbo { font-family:'Bilbo Swash Caps', cursive; }
 .nothing { font-family:'Nothing You Could Do', cursive; }
@@ -33,6 +33,7 @@ h1 {
   color:#960400;
   margin-top:0.5em;
 }
+li { line-height:1.7em; }
 .left { float:left; }
 .right { float:right; }
 header.top {
@@ -228,10 +229,17 @@ div.articles-image {
   margin:0 auto 2em auto;
 }
 img.thumbnail {
-  width:70px;
-  height:70px;
+  width:100px;
+  height:100px;
   border:1px solid black;
   margin:5px;
+}
+.object-view-text { float:right; }
+.object-view-image {
+  -webkit-border-radius:10px;
+  -moz-border-radius:10px;
+  border-radius:10px;
+  border:2px solid white;
 }
 .ui-autocomplete-category {
   font-weight:bold;
@@ -257,6 +265,24 @@ img.thumbnail {
   font-weight:normal;
   color:#960400;
 }
+.ui-accordion-header {
+  color:#960400;
+  font-size:1em;
+  background:none;
+  border:none;
+  margin:0px;
+  margin-left:1em;
+  padding:2px;
+}
+.ui-accordion-content {
+  background:none;
+  border:none;
+  margin:0px;
+  margin-left:1.8em;
+  font-size:0.8em;
+  line-height:1.8em;
+}
+.ui-state-hover .ui-icon, .ui-state-focus .ui-icon, .ui-state-default .ui-icon { background:none; }
 @media screen and (max-width: 1190px) {
 }
 @media screen and (max-width: 1024px) and (min-width: 768px) {
@@ -265,4 +291,4 @@ img.thumbnail {
 }
 @media only screen and (max-width: 479px) {
 }
-";s:5:"files";a:1:{s:61:"/home/jon/wwwroot/enabled_hosts/jonnev.se/bmo/css/styles.less";i:1337998611;}s:7:"updated";i:1337998612;}
+";s:5:"files";a:1:{s:61:"/home/jon/wwwroot/enabled_hosts/jonnev.se/bmo/css/styles.less";i:1338148096;}s:7:"updated";i:1338148097;}

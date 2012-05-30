@@ -22,7 +22,7 @@ class Controller_Gallery extends CoreController {
 		$html = "<div>";
 		$i = 0;
 		foreach ($array as $val) {
-			if ($i%6==0) {
+			if ($i%5==0) {
 				$html .= "</div>\n\t<div>";
 			}
 			$i++;
