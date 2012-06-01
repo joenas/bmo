@@ -25,7 +25,7 @@ class View_Articles_Helper {
 		foreach ($array as $val) {
 			$html .= "<h3>".$val['title']."</h3>";	
 			//$html .= " <small><em>".$val['author']." - Publicerad: </small><span class='date'>".$val['pubdate']."</span></em>";
-			$html .= substr($val['content'], 0, 250)."...";
+			$html .= substr($val['content'], 0, 251)."...";
 			$html .= " <a href='{$this->baseUrl}articles/show/".$val['permalink']."'>Läs mer </a>";
 			$html .= "<div class='spacer'></div>";
 		}

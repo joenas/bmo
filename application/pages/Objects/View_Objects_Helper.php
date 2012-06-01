@@ -11,10 +11,21 @@ class View_Objects_Helper {
 
 	// Create html for showing an article
 	public function objectView($array) {
-				$html = "<h2 class=object-view-title>".$array['title']."</h2><div class='content'>";
-				$html .= "<img class=object-view-image src={$this->baseUrl}".str_replace('img/bmo', "img/bmo/250", $array['image']).">";
-				$html .= "<span class='object-view-text'> <small>".$array['text']." - Ägare: </small>".$array['owner']."</span></div>";
-			return $html;			
+		$html = "\n\t<h2 class=object-view-title>".$array['title']."</h2><div class='object-view-content'>";
+		$html .= "\n\t<img class=object-view-image src={$this->baseUrl}".str_replace('img/bmo', "img/bmo/250", $array['image']).">";
+		$html .= "\n\t<div class='object-view-text'><p>".$array['text']."</p> <p>Ägare: ".$array['owner']."</div></div>";
+		return $html;			
+	}
+
+	public function categoryView($array) {
+
+		$html = "";
+		foreach($array as $val) {
+			$html .= $this->objectView($val);
+			$html .= "<hr class=object-view-spacer>";
+		}
+
+		return $html;
 	}
 
 	 public function viewSidebar() {
@@ -28,32 +39,14 @@ class View_Objects_Helper {
 
 	 }
 
-	/*public function viewSidebar() {
-		$categories = $this->objects->getColumnDistinct('category');
-		$objects = $this->objects->getAll();
+	public function randomObject() {
+		 $query = "SELECT * FROM Object ORDER BY RANDOM() LIMIT 1;";
+		 $res = $this->db->ExecuteSelectQueryAndFetchAll($query);
 
-		$html = '<h2>Kategorier</h2><div id=categories-accordion>';
-		
-		foreach ($categories as $val) {
-			$html .= "\n\t<a href='#'>".$val['category']."</a>";
-			$html .= "\n\t\t<div>";
-			foreach ($objects as $array) {
-			  if ($array['category']==$val['category']) {
-			  	$html .= "<a href={$this->baseUrl}".$array['permalink'].">".$array['title']."</a><br>";
-			  	//$html .= $array['title']."<br>";
-			  }
-			}
-			$html .= "</div>";
-		}
-		
-		$html .= "</ul></div>";
-		ViewHelper::Instance()->jsDocumentReadyFunction("$(function() {
-		$( '#categories-accordion' ).accordion({
-			autoHeight: false,
-			navigation: true
-		});
-	});");
-		return $html;
+		 return $this->objectView($res[0]);
 
-	}*/
+	}
+
+
+
 }

@@ -19,7 +19,6 @@ require( APP.'config.php' );
 
 $core = new Core();
 $core->route();
-
 //----------------------------------------------------
 
 ?>

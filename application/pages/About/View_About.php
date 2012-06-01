@@ -1,9 +1,8 @@
   <div class="tertiary">
-    <ul><h2>Länklista</h2>
+    <ul><h2>Länkar</h2>
       <li><a href="http://bth.se">Blekinge Tekniska Högskola</a></li>
-      <li><a href="http://php.net">php.net</a></li>
-      <li><a href="http://bth.se">bth.se</a></li>
-      <li><a href="http://bth.se">bth.se</a></li>
+      <li><a href="http://edu.bth.se/utbildning/utb_kurstillfalle.asp?KtAnmKod=C0202&KtTermin=20122&lang=sv">Kursinfo @ BTH</a></li>
+      <li><a href="http://dbwebb.se/forum/">Dbwebb forum</a></li>
 
   </div>
 

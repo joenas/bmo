@@ -43,7 +43,7 @@ class Controller_Articles extends CoreController {
 			
 				// Ugly hack to make up for html in post...
 				if ($this->request->arguments[2]=="begravningsseder-och-bruk") {
-					$this->data['pageStyle'] = "article.articles { width: 100%; } article.begravning-right { float: right; width: 35%; } article.begravning-right figure { margin: 20px 0 20px 40px; }";
+					$this->data['pageStyle'] = "article.articles { width: 100%; } aside.begravning-right { background: white; float: right; width: 35%; } aside.begravning-right figure { margin: 20px 0 20px 40px; }";
 					$this->data['pageStyle'] .= " div.primary { width: 80%; } div.secondary { display: none; } article.begravning-left { width: 65%; float: left; } ";
 				}
 				else {

@@ -179,20 +179,11 @@ div.mainwrapper {
 		background: url('/img/design/Vinranka_90.jpg') repeat-y right top;
 
 }
-
-div.randimage {
-	.left;
-	margin-right: 2em;
-	margin-top: 3em;
-	width: @divimagewidth;
-	overflow: auto;
-	border: 1px solid black;
-	.border-radius(10px);
-}
-
+	
 div.primary {
 	.left;
 	width: @divprimwidth;
+	margin-bottom: 1.5em;
 	//border: 1px solid blue;	
 	h1 {
 		margin-top: 0px;
@@ -287,6 +278,7 @@ article {
 		textarea {
 			width: 600px;
 		}
+		form.editor { margin-top: 1.5em;}
 		//form.login { margin-top: 2em; }
 		div.editor-display-container { min-height: 400px; }
 		div.editor-message { display: none; width: 200px;  .left; margin-left: 2em; margin-bottom: 0; padding: 3px; }
@@ -403,13 +395,35 @@ img.thumbnail {
 		margin: 5px;
 }
 
+.object-view-content {
+	width: 100%;
+	overflow: auto;
+	margin-bottom: 2em;
+}
+
 .object-view-text {
-	.right;
+	.left;
+	width: 300px;
+	margin-left: 2em;
+	p {
+		margin: 0.5em;
+		font-size: 1em;
+	}
 }
 
 .object-view-image {
+	.left;
 	.border-radius(10px);
 	border: 2px solid white;
+	width: 250px;
+}
+
+.object-view-spacer {
+	margin: 2em 0;
+}
+
+p.search-result {
+	margin: 0.5em 0;
 }
 
 .ui-autocomplete-category {
@@ -443,25 +457,6 @@ img.thumbnail {
 	color: @primtextcolor;
 }
 
-.ui-accordion-header {
-	color: @primtextcolor;
-	font-size: 1em;
-	background: none;
-	border: none;
-	margin: 0px;	
-	margin-left: 1em;
-
-	padding: 2px;
-}
-
-.ui-accordion-content {
-	background: none;
-	border: none;
-		margin: 0px;
-	margin-left: 1.8em;
-	font-size: 0.8em;
-	line-height: 1.8em;
-}
 
 .ui-state-hover .ui-icon, .ui-state-focus .ui-icon, .ui-state-default .ui-icon {
 	background: none;

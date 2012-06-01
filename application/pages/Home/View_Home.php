@@ -1,6 +1,6 @@
 
   <div class="tertiary">
-    &nbsp;
+    <span style="text-align: center; margin-left: 1.7em;"><img src="img/design/jesus.jpg" width=220></span>
   </div>
 
   <!-- primary content -->

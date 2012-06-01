@@ -106,7 +106,6 @@ class ViewHelper {
 			$data .= "\n{ label: '" . $val['title'] . "', category: 'Artiklar', href: '/articles/show/". $val['permalink']."' },";
 		}
 		foreach ($objectsArray as $val ) {
-			//$data .= "\n{ label: '" . $val['title'] . "', category: '" . $val['category']. "' },";
 			$data .= "\n{ label: '" . $val['title'] . "', category: 'Objekt', href: '/objects/show/". $val['permalink']. "' },";
 		}
 
@@ -128,7 +127,7 @@ class ViewHelper {
 
 		echo <<< EOD
 		<form action='{$this->baseUrl}search' method=post>
-		<label for='search'>Sök: </label><input id='search' />
+		<label for='search'>Sök: </label><input id='search' name=search />
 		</form>
 EOD;
 	}

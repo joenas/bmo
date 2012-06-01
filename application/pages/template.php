@@ -80,8 +80,8 @@ require( $this->view );
 	</p>
 	</div>
 	<div class="rightfoot">
-<!-- 		<p>
-		<a <?php $this->helper->Link('home');?> id="home-">Hem</a>
+		<p>
+<!-- 		<a <?php $this->helper->Link('home');?> id="home-">Hem</a>
 		<a <?php $this->helper->Link('articles');?> id="articles-">Artiklar</a>
 		<a <?php $this->helper->Link('objects');?> id="objects-">Objekt</a>
 		<a <?php $this->helper->Link('gallery');?> id="gallery-">Galleri</a>
