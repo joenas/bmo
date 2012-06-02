@@ -31,14 +31,11 @@ class Core {
 
 			// Give arguments and baseUrl
 			$this->controller->baseUrl = $request->baseUrl;	
-			//$this->controller->arguments = $request->arguments;
 
 			// Look for method, otherwise fall back to index()
 			if (method_exists($this->controller, $method)) {				
-				//$this->controller->debug->message("Calling {$controllerClass}->{$method}()", __LINE__, __FILE__);
 				$this->controller->$method();
 			} else {
-				//$this->controller->debug->message("Missing method {$method}(), calling default {$controllerClass}->index()", __LINE__, __FILE__);
 				$this->controller->index();
 			}
 

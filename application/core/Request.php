@@ -33,7 +33,7 @@ class Request {
 		$controller = !empty($splits[0]) ? $splits[0] : DEFAULT_CONTROLLER;
 		$method = !empty($splits[1]) ? $splits[1] : DEFAULT_METHOD;
 		$arguments = $splits;
-    	unset($arguments[0], $arguments[1]);
+    unset($arguments[0], $arguments[1]);
 		
 		$this->baseUrl = $baseUrl;
 		$this->controller = $controller;

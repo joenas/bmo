@@ -5,9 +5,7 @@
   </div>
 
   <!-- primary content -->
-  <div class="primary">
-     <?php //echo $this->helper->RandomImage(); ?>
- 
+  <div class="primary"> 
 	<article class="articles">
   
   <?php echo isset($view_article_list) ? $view_article_list : ''; ?>

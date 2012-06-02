@@ -8,6 +8,7 @@
   <article class='about'>
   <h1><?php echo $view_title; ?></h1>
   <?php echo $view_content; ?>
+  <p><small>Sökfunktionen stöjder endast ett sökord.</small></p>
   </article>
   </div>
 

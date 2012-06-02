@@ -7,7 +7,7 @@ class Controller_Articles extends CoreController {
 
 	public function getData() {
 			$this->data['pageId'] = "articles";
-			$this->data['title'] = "Artiklar";
+			$this->data['title'] = "BMO: Artiklar";
 			return $this->data;
 	}
 

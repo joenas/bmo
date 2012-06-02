@@ -55,7 +55,6 @@ function autoloader($className) {
 	elseif (is_file( MODEL.$className.".php" )) {
 		require_once( MODEL.$className.".php" );
 	}
-	//else die("Error in ".__FILE__.": Class file for <code>".$className."</code> not found in " . $classPath);
 }
 
 spl_autoload_register('autoloader');

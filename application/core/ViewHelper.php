@@ -22,35 +22,10 @@ class ViewHelper {
 
 	public function Link($link, $type = 'href', $abaseUrl = null) {
 
-		// If provided with new baseUrl, use that. Otherwise check for root and alter or use regular			
+		// If provided with new baseUrl, use that. Otherwise use regular
 		$baseUrl = ( isset($abaseUrl) ) ? $abaseUrl : $this->baseUrl;
 				print $type . "='{$baseUrl}{$link}'";
 	
-	}
-
-	public function RandomImage() {
-
-		$aPath = ($this->baseUrl=='/') ? 'img/550/' : $this->baseUrl.'img/250/';	
-		$list = $this->ReadDirectory($aPath);
-		$image = $list[rand(0, count($list)-1)];
-		return "<div class='randimage'><img width=220 src='/{$aPath}{$image}' alt=''></div>";
-
-	}
-
-	public function ReadDirectory($aPath) {
-		$list = Array();
-		if(is_dir($aPath)) {
-			if ($dh = opendir($aPath)) {
-				while (($file = readdir($dh)) !== false) {
-					if(is_file("$aPath/$file") && $file != '.htaccess') {
-						$list[$file] = "$file";
-					}
-				}
-				closedir($dh);
-			}
-		}
-		sort($list, SORT_STRING);
-		return $list;
 	}
 
 	public function getCurrentUrl() {
@@ -103,10 +78,10 @@ class ViewHelper {
 
 		$data = "$(function() { var data = [ ";
 		foreach ($articlesArray as $val ) {
-			$data .= "\n{ label: '" . $val['title'] . "', category: 'Artiklar', href: '/articles/show/". $val['permalink']."' },";
+			$data .= "\n{ label: '" . $val['title'] . "', category: 'Artiklar', href: '{$this->baseUrl}articles/show/". $val['permalink']."' },";
 		}
 		foreach ($objectsArray as $val ) {
-			$data .= "\n{ label: '" . $val['title'] . "', category: 'Objekt', href: '/objects/show/". $val['permalink']. "' },";
+			$data .= "\n{ label: '" . $val['title'] . "', category: 'Objekt', href: '{$this->baseUrl}objects/show/". $val['permalink']. "' },";
 		}
 
 

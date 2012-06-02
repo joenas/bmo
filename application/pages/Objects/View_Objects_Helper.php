@@ -9,7 +9,7 @@ class View_Objects_Helper {
 		$this->objects = new Object($this->db);
 	}
 
-	// Create html for showing an article
+	// Create html for showing an object
 	public function objectView($array) {
 		$html = "\n\t<h2 class=object-view-title>".$array['title']."</h2><div class='object-view-content'>";
 		$html .= "\n\t<img class=object-view-image src={$this->baseUrl}".str_replace('img/bmo', "img/bmo/250", $array['image']).">";
@@ -17,6 +17,7 @@ class View_Objects_Helper {
 		return $html;			
 	}
 
+	// Create html for showing objects from a category
 	public function categoryView($array) {
 
 		$html = "";
@@ -46,7 +47,5 @@ class View_Objects_Helper {
 		 return $this->objectView($res[0]);
 
 	}
-
-
 
 }

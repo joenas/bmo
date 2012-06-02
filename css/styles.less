@@ -1,15 +1,5 @@
 // http://colorschemedesigner.com/#5t51B--iOK-00
 
-//@mixin brand-gradient {
-//  background: url( imagefallback.png ) repeat-x $brand-color-darker;
-//  background: -moz-radial-gradient(center, ellipse cover, $brand-color 22%, $brand-color-darker 100%);
-//  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(22%,$brand-color), color-stop(100%,$brand-color-darker));
-//  background: -webkit-radial-gradient(center, ellipse cover, $brand-color 22%,$brand-color-darker 100%);
-//  background: -o-radial-gradient(center, ellipse cover, $brand-color 22%,$brand-color-darker 100%);
-//  background: -ms-radial-gradient(center, ellipse cover, $brand-color 22%,$brand-color-darker 100%);
-//  background: radial-gradient(center, ellipse cover, $brand-color 22%,$brand-color-darker 100%);
-//}
-
 @import url(forms.css);
 @import url(source.css);
 
@@ -165,10 +155,8 @@ header.logo {
 
 div.stickfootwrap {
 	min-height: 100%;
-//	background-color: yellow;
 	overflow: auto;
 	background: url('/img/design/border-left-new.jpg') repeat-y left top;
-	//background: url('/images/bg02.jpg') repeat-x left top;
 }
 
 div.mainwrapper {
@@ -176,7 +164,7 @@ div.mainwrapper {
 	padding-bottom: @footerheight;
 	min-height: 35em;
 	overflow: auto;
-		background: url('/img/design/Vinranka_90.jpg') repeat-y right top;
+	background: url('/img/design/Vinranka_90.jpg') repeat-y right top;
 
 }
 	
@@ -184,7 +172,6 @@ div.primary {
 	.left;
 	width: @divprimwidth;
 	margin-bottom: 1.5em;
-	//border: 1px solid blue;	
 	h1 {
 		margin-top: 0px;
 		font-size: 1.2em;
@@ -194,8 +181,6 @@ div.primary {
 div.secondary {
 	.right;
 	width: @divsecwidth;
-	//border: 1px solid red;
-	//min-height: 600px;
 	ul {
 		padding: 0.5em;
 	}
@@ -207,7 +192,6 @@ div.secondary {
 div.tertiary {
 	.left;
 	width: @divterwidth;
-	//border: 1px solid green;
 }
 
 
@@ -284,8 +268,6 @@ article {
 		div.editor-message { display: none; width: 200px;  .left; margin-left: 2em; margin-bottom: 0; padding: 3px; }
 		div.editor-dropdown { .left }
 	}
-	&.about {
-	}
 
 	&.articles {
 		.date {
@@ -312,10 +294,6 @@ article {
 			font-style: italic;
 			color: @sectextcolor;
 		}
-	}
-
-	&.objects {
-
 	}
 
 }
@@ -371,16 +349,14 @@ img.articles {
 	border: 1px solid black;
 
 }
+
 figcaption, figcaption.articles {
 	font-size: 0.8em;
 	font-style: normal;
 	width: 250px;
-	//border: 1px solid green; 
-
 }
 
 div.articles-image { 
-	//border: 1px solid green; 
 	clear: both; 
 	overflow: auto;
 	min-width: 100px; 
@@ -415,7 +391,7 @@ img.thumbnail {
 	.left;
 	.border-radius(10px);
 	border: 2px solid white;
-	width: 250px;
+	max-width: 250px;
 }
 
 .object-view-spacer {

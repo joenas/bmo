@@ -21,12 +21,11 @@ class Controller_Search extends CoreController {
 		$db = Database::Instance();
 
 		$this->data['view_title'] = "Sökresultat";
-		//$this->data['view_content'] = "<p>Inget hittades</p>";
 
-		//
-
+		// Start search
 		if (isset($_POST['search'])) {
 			$search = strip_tags(trim($_POST['search']));
+			$this->data['view_title'] .= ": \"{$search}\"";
 
 			if (strlen($search) < 3 ) {
 				$this->data['view_content'] = "<p>Söksträngen måste vara längre än 3 tecken</p>";
@@ -35,9 +34,10 @@ class Controller_Search extends CoreController {
 				$this->data['view_content'] = "";
 
 				$db = Database::Instance();
+
+				// Look for articles matching search
 				$query = "SELECT * FROM Article WHERE category='article' AND content LIKE '%{$search}%' OR title LIKE '%{$search}%';";
 				$res = $db->ExecuteSelectQueryAndFetchAll($query);	
-				//var_dump($res);			
 
 				if (!empty($res)) {
 					$found = true;
@@ -48,6 +48,7 @@ class Controller_Search extends CoreController {
 					$this->data['view_content'] .= $html;
 				}
 
+				// Look for objects matching search
 				$query = "SELECT * FROM Object WHERE text LIKE '%{$search}%' OR title LIKE '%{$search}%';";
 				$res = $db->ExecuteSelectQueryAndFetchAll($query);
 				if (!empty($res)) {

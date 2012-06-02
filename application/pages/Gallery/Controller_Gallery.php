@@ -8,7 +8,7 @@ class Controller_Gallery extends CoreController {
 
 	public function getData() {
 		$this->data['pageId'] = "gallery";
-		$this->data['title'] = "Galleri";
+		$this->data['title'] = "BMO: Galleri";
 		$this->data['pageStyle'] = 'div.primary { width: 60%; margin: 0 auto; }';
 		return $this->data;
 	}
@@ -22,7 +22,7 @@ class Controller_Gallery extends CoreController {
 		$html = "<div>";
 		$i = 0;
 		foreach ($array as $val) {
-			if ($i%5==0) {
+			if ($i%5==0 && $i!=0) {
 				$html .= "</div>\n\t<div>";
 			}
 			$i++;
@@ -30,7 +30,7 @@ class Controller_Gallery extends CoreController {
 			$html .= "\n\t<img class='thumbnail' title='".$val['title']."' src=".str_replace('/bmo/', '/bmo/250/', $val['image'])."></a>";
 		}
 
-		$this->data['html'] = $html;
+		$this->data['html'] = $html . "</div>";
 
 		ViewHelper::Instance()->jsDocumentReadyFunction("var shared = { position: { my: 'bottom left', at: 'top right' }, style: { classes: 'ui-tooltip-rounded ui-tooltip-red' } }");
 		ViewHelper::Instance()->jsDocumentReadyFunction("$('.thumbnail').qtip( $.extend({}, shared, { content: this.alt }));");

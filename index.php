@@ -16,7 +16,6 @@ require( APP.'config.php' );
 
 // Create the Core object and route
 //----------------------------------------------------
-
 $core = new Core();
 $core->route();
 //----------------------------------------------------

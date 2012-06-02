@@ -245,7 +245,7 @@ img.thumbnail {
   -moz-border-radius:10px;
   border-radius:10px;
   border:2px solid white;
-  width:250px;
+  max-width:250px;
 }
 .object-view-spacer { margin:2em 0; }
 p.search-result { margin:0.5em 0; }
