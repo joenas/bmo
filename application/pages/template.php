@@ -84,11 +84,11 @@ require( $this->view );
 
 	</footer>
 </div>
-
 <script <?php $this->helper->Link('js/jquery-1.7.2.min.js', 'src');?> type="text/javascript"></script>
+<script <?php $this->helper->Link('js/jquery.validate.js', 'src');?> type="text/javascript"></script>
 <script <?php $this->helper->Link('js/jquery.qtip.js', 'src');?> type="text/javascript"></script>	
 <script <?php $this->helper->Link('js/jquery-ui-1.8.20.custom.min.js', 'src');?> type="text/javascript"></script>
-<script <?php $this->helper->Link('js/jquery.colorbox.js', 'src');?> type="text/javascript"></script>
+<script <?php $this->helper->Link('js/jquery.colorbox-min.js', 'src');?> type="text/javascript"></script>
 <script <?php $this->helper->Link('js/admin.js', 'src');?> type="text/javascript"></script>
 
 <?php echo $this->helper->getJsFunctions(); ?>

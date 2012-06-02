@@ -24,6 +24,8 @@ class View_Admin_Helper {
 			$model = new $this->model($this->db);
 			$fields = $model->fields;
 
+			ViewHelper::Instance()->jsDocumentReadyFunction("$('#view').validate();");
+
 			switch ($this->model) :
 
 			case 'Article':
@@ -75,8 +77,8 @@ class View_Admin_Helper {
 
 		$disabled = isset($dropdown) ? '' : 'disabled';
 		$html = "<h2>{$headline}</h2>";
-		//var_dump($res);
 		$html .= "\n\t<div class='editor-message notice' id='message'></div><br><br>\n";
+
 		// Dropdown menu
 		if (isset($dropdown)) {
 			
@@ -107,17 +109,11 @@ class View_Admin_Helper {
 		<div id='dialog-confirm' class='ui-dialog' title='Ta bort?'>
 		<p><span class='ui-icon ui-icon-alert' style='float:left; margin:0 7px 20px 0;'></span>Artikeln kommer att tas bort, är du säker?</p>
 		</div>";
+
+		ViewHelper::Instance()->jsDocumentReadyFunction("$( 'button' ).button({});");
+
 		}
 
-		ViewHelper::Instance()->jsDocumentReadyFunction("
-		$( '#save' ).button({
-			icons: {
-				primary: 'save-button'
-			}
-		});
-		$( 'button' ).button({
-		});
-		");
 
 	return $html;
 
@@ -136,7 +132,8 @@ class View_Admin_Helper {
 				$html .= "\n\t<textarea class='editor {$this->model}' title='Tillåtna taggar: ".htmlentities($val['tags'])."' name=".$val['name']." id=".$val['name'].">".$item[0][$val['name']]."</textarea><br>";
 			}
 			else {
-				$html .= "\n\t<input class={$this->model} type=".$val['type']."  name=".$val['name']." id=".$val['name']." value='".$item[0][$val['name']]."'>{$separator}";
+				//$html .= "\n\t<input class={$this->model} type=".$val['type']."  name=".$val['name']." id=".$val['name']." value='".$item[0][$val['name']]."'>{$separator}";
+				$html .= "\n\t<input class=".$val['validate']." type=".$val['type']."  name=".$val['name']." id=".$val['name']." value='".$item[0][$val['name']]."'>{$separator}";
 			}
 
 			// Get some nice tooltips

@@ -1,6 +1,6 @@
 
   <div class="tertiary">
-    <span style="text-align: center; margin-left: 1.7em;"><img src="img/design/jesus.jpg" width=220></span>
+    <span style="text-align: center; margin-left: 1.7em;"><img src="img/design/jesus.jpg" width=200 alt="Jesus med törnkrans"></span>
   </div>
 
   <!-- primary content -->

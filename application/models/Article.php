@@ -6,11 +6,11 @@ class Article extends CoreModel {
 	protected $db;
 
 	public $fields = array( 					
-							'title' 	=> array('name' => 'title', 'label' => 'Titel', 'type' =>'text', 'tags' => 'inga'),
-							'category' 	=> array('name' => 'category', 'label' => '<br>Kategori', 'type' => 'text', 'tags' => 'inga'),
-							'author'	=> array('name' => 'author', 'label' => 'Författare','type' =>'text', 'tags' => 'inga'),
-							'pubdate'	=> array('name' => 'pubdate', 'label' => 'Datum','type' =>'text', 'tags' => 'inga'),
-							'content'	=> array('name' => 'content', 'label' => '', 'type' =>'textarea', 'tags' => '<a><h1><h2><img><p><b><i><blockquote>')
+							'title' 	=> array('name' => 'title', 'label' => 'Titel', 'type' =>'text', 'tags' => 'inga', 'validate' => 'required'),
+							'category' 	=> array('name' => 'category', 'label' => '<br>Kategori', 'type' => 'text', 'tags' => 'inga', 'validate' => 'required'),
+							'author'	=> array('name' => 'author', 'label' => 'Författare','type' =>'text', 'tags' => 'inga', 'validate' => ''),
+							'pubdate'	=> array('name' => 'pubdate', 'label' => 'Datum','type' =>'text', 'tags' => 'inga', 'validate' => ''),
+							'content'	=> array('name' => 'content', 'label' => '', 'type' =>'textarea', 'tags' => '<a><h1><h2><img><p><b><i><blockquote>', 'validate' => 'required')
 					);
 
 	 public function __construct($database) {

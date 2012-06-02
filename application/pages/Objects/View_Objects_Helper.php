@@ -12,7 +12,7 @@ class View_Objects_Helper {
 	// Create html for showing an object
 	public function objectView($array) {
 		$html = "\n\t<h2 class=object-view-title>".$array['title']."</h2><div class='object-view-content'>";
-		$html .= "\n\t<img class=object-view-image src={$this->baseUrl}".str_replace('img/bmo', "img/bmo/250", $array['image']).">";
+		$html .= "\n\t<img class=object-view-image src={$this->baseUrl}".str_replace('img/bmo', "img/bmo/250", $array['image'])." alt='".$array['title']."'>";
 		$html .= "\n\t<div class='object-view-text'><p>".$array['text']."</p> <p>Ägare: ".$array['owner']."</div></div>";
 		return $html;			
 	}

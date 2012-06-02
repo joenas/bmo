@@ -6,11 +6,11 @@ class Object extends CoreModel {
 	private $db;
 
 	public $fields = array( 
-							'category' 	=> array('name' => 'category', 'label' => 'Kategori', 'type' => 'text', 'tags' => 'inga'),
-							'title' 	=> array('name' => 'title', 'label' => 'Titel', 'type' =>'text', 'tags' => 'inga'),
-							'text'	=> array('name' => 'text', 'label' => 'Text', 'type' =>'text', 'tags' => 'inga'),
-							'image'	=> array('name' => 'image', 'label' => 'Bildfil', 'type' =>'text', 'tags' => 'inga'),
-							'owner'	=> array('name' => 'owner', 'label' => 'Ägare','type' =>'text', 'tags' => 'inga')
+							'category' 	=> array('name' => 'category', 'label' => 'Kategori', 'type' => 'text', 'tags' => 'inga', 'validate' => ''),
+							'title' 	=> array('name' => 'title', 'label' => 'Titel', 'type' =>'text', 'tags' => 'inga', 'validate' => 'required'),
+							'text'	=> array('name' => 'text', 'label' => 'Text', 'type' =>'text', 'tags' => 'inga', 'validate' => ''),
+							'image'	=> array('name' => 'image', 'label' => 'Bildfil', 'type' =>'text', 'tags' => 'inga', 'validate' => 'required'),
+							'owner'	=> array('name' => 'owner', 'label' => 'Ägare','type' =>'text', 'tags' => 'inga', 'validate' => '')
 					);
 
 	public function __construct($database) {

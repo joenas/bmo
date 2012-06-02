@@ -1,9 +1,10 @@
   <div class="tertiary">
-    <ul><h2>Länkar</h2>
+    <h2 class=about-link-header>Länkar</h2>
+    <ul>
       <li><a href="http://bth.se">Blekinge Tekniska Högskola</a></li>
-      <li><a href="http://edu.bth.se/utbildning/utb_kurstillfalle.asp?KtAnmKod=C0202&KtTermin=20122&lang=sv">Kursinfo @ BTH</a></li>
+      <li><a href="http://edu.bth.se/utbildning/utb_kurstillfalle.asp?KtAnmKod=C0202&amp;KtTermin=20122&amp;lang=sv">Kursinfo @ BTH</a></li>
       <li><a href="http://dbwebb.se/forum/">Dbwebb forum</a></li>
-
+    </ul>
   </div>
 
   <!-- primary content -->
