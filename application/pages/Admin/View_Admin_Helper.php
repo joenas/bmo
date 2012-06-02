@@ -5,7 +5,7 @@ class View_Admin_Helper {
 	private $id;
 	private $model;
 
-	public function __construct($model, $id = "-1") {
+	public function __construct($model, $id = null) {
 		$this->id = $id;
 		$this->model = $model;
 		$this->db = Database::Instance();
@@ -90,7 +90,7 @@ class View_Admin_Helper {
 		}
 
 		// The fields for adding or updating 
-		if (isset($fields)) {
+		if (isset($fields) && $this->id!="-1") {
 
 		$the_fields = $this->setupFields($fields, $item);
 
@@ -132,7 +132,6 @@ class View_Admin_Helper {
 				$html .= "\n\t<textarea class='editor {$this->model}' title='Tillåtna taggar: ".htmlentities($val['tags'])."' name=".$val['name']." id=".$val['name'].">".$item[0][$val['name']]."</textarea><br>";
 			}
 			else {
-				//$html .= "\n\t<input class={$this->model} type=".$val['type']."  name=".$val['name']." id=".$val['name']." value='".$item[0][$val['name']]."'>{$separator}";
 				$html .= "\n\t<input class=".$val['validate']." type=".$val['type']."  name=".$val['name']." id=".$val['name']." value='".$item[0][$val['name']]."'>{$separator}";
 			}
 

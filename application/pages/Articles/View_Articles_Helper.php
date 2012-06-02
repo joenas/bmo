@@ -24,7 +24,6 @@ class View_Articles_Helper {
 		$html = "";
 		foreach ($array as $val) {
 			$html .= "<h3>".$val['title']."</h3>";	
-			//$html .= " <small><em>".$val['author']." - Publicerad: </small><span class='date'>".$val['pubdate']."</span></em>";
 			$html .= substr($val['content'], 0, 251)."...";
 			$html .= " <a href='{$this->baseUrl}articles/show/".$val['permalink']."'>Läs mer </a>";
 			$html .= "<div class='spacer'></div>";
@@ -56,7 +55,8 @@ class View_Articles_Helper {
 			$divmain = ($i%2 == 0) ? "</div><div class='articles-image'>" : '';
 			$float = ($i%2 == 0) ? "left" : "right";
 			$i++;
-			$html .= $divmain."\n\t<figure class='articles {$float}'><a href='{$this->baseUrl}objects/show/".$val['permalink']."'><img class='articles' src='{$this->baseUrl}".str_replace('/bmo/', '/bmo/250/', $val['image'])."' alt='".$val['title']."' ";
+			$html .= $divmain."\n\t<figure class='articles {$float}'><a href='{$this->baseUrl}objects/show/".$val['permalink']."'>";
+			$html .= "<img class='articles' src='{$this->baseUrl}".str_replace('/bmo/', '/bmo/250/', $val['image'])."' alt='".$val['title']."' ";
 			$html .= "title='".$val['text']."'></a>\n\t<figcaption class='articles'>".$val['text']."</figcaption></figure>";
 		}
 		$html .= "</div>";

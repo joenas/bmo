@@ -23,10 +23,7 @@ class Controller_Admin extends CoreController {
 				// Basic variables for template
 		$this->data['pageId'] = "admin";
 		$this->data['title'] = "BMO Admin";
-		
-		$this->data['pageStyle'] = <<< EOD
- header.logo { display: none; } div.primary { width: 80%; }
-EOD;
+		$this->data['pageStyle'] = "header.logo { display: none; } div.primary { width: 80%; }";
 
 		return $this->data;
 	}
@@ -156,6 +153,7 @@ EOD;
 
 	// Inserts a new object/article to database and redirects to edit View
 	public function insert() {
+
 		if ($this->authenticated===false) {
 			$this->index();
 		} 
@@ -167,9 +165,10 @@ EOD;
 			// Create the model, for example 'Article'
 			$model = new $this->model($this->db);
 
-			// Create the post
+			// Create the post. Function is in the model file, ie 'models/Article.php'
 			$res = $model->create( $_POST );
 
+			// If creating failed, go back to add View and show error message
 			if ($res==0) {
 				$this->message = "Det gick ej att lägga till, vänligen kontrollera databasen";
 				$this->id = null;
@@ -186,9 +185,9 @@ EOD;
 					$this->message = "Objektet har lagts till.";
 				break;
 				}
+				// Reroute to edit View with the new post id
 				$this->reroute('edit', $this->model, $res);
 			}
-			// Reroute to edit View with the new post id
 			
 		}
 	}
@@ -215,14 +214,18 @@ EOD;
 			$this->redirectPage('admin');
 	}
 
-	// Gets the need id and object type for editing etc
+	// Gets the needed ID and model type for editing etc
 	private function requestParser() {
 
 		// Arguments from request, ie 'article' or 'object'
 		$this->model = 	!isset($this->model) 
 											? isset($this->request->arguments[2]) ? $this->request->arguments[2] : null 
 										: $this->model;
+
+		// Convert to 'Example' or 'Object'
 		$this->model = ucfirst($this->model);
+
+		// Check if the model class exists
 		$this->model = class_exists($this->model) ? $this->model : null;
 
 		// Check for id in $_POST first, then in request URL 		

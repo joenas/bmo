@@ -32,7 +32,7 @@ class Controller_Gallery extends CoreController {
 
 		$this->data['html'] = $html . "</div>";
 
-		ViewHelper::Instance()->jsDocumentReadyFunction("var shared = { position: { my: 'bottom left', at: 'top right' }, style: { classes: 'ui-tooltip-rounded ui-tooltip-red' } }");
+		ViewHelper::Instance()->jsDocumentReadyFunction("var shared = { position: { my: 'bottom left', at: 'top right' }, style: { classes: 'ui-tooltip-rounded ui-tooltip-green' } }");
 		ViewHelper::Instance()->jsDocumentReadyFunction("$('.thumbnail').qtip( $.extend({}, shared, { content: this.alt }));");
 		ViewHelper::Instance()->jsDocumentReadyFunction("jQuery('a.gallery').colorbox({rel:'gallery', transition:'fade', width:'55%', height:'65%'});");
 
