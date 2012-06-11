@@ -75,7 +75,7 @@ div.stickfootwrap {
 div.mainwrapper {
   width:95%;
   padding-bottom:90px;
-  min-height:35em;
+  min-height:45em;
   overflow:auto;
   background:url('/img/design/Vinranka_92.jpg') repeat-y right top;
 }
@@ -283,4 +283,4 @@ h2.about-link-header { margin-left:1.5em; }
 }
 @media only screen and (max-width: 479px) {
 }
-";s:5:"files";a:1:{s:52:"/var/www/enabled_hosts/jonnev.se/bmo/css/styles.less";i:1338650804;}s:7:"updated";i:1338650805;}
+";s:5:"files";a:1:{s:52:"/var/www/enabled_hosts/jonnev.se/bmo/css/styles.less";i:1338838111;}s:7:"updated";i:1338838113;}
